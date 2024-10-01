@@ -1,0 +1,12 @@
+{
+  "cxxNamespace": ["<<margeloContact"],
+  "ios": {
+    "iosModulename": "NitroContact"
+  },
+  "android": {
+    "androidNamespace": ["margeloContact"],
+    "androidCxxLibName": "NitroContact"
+  },
+  "autolinking": {},
+  "ignorePaths": ["node_modules"]
+}
