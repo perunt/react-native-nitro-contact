@@ -8,25 +8,12 @@
 #pragma once
 
 // Forward declarations of C++ defined types
-// Forward declaration of `Contact` to properly resolve imports.
-namespace margelo::nitro::margeloContact { struct Contact; }
-// Forward declaration of `EmailAddress` to properly resolve imports.
-namespace margelo::nitro::margeloContact { struct EmailAddress; }
-// Forward declaration of `HybridContactInterfaceSpec` to properly resolve imports.
-namespace margelo::nitro::margeloContact { class HybridContactInterfaceSpec; }
-// Forward declaration of `PhoneNumber` to properly resolve imports.
-namespace margelo::nitro::margeloContact { struct PhoneNumber; }
+// Forward declaration of `HybridContactSpec` to properly resolve imports.
+namespace margelo::nitro::margeloContact { class HybridContactSpec; }
 
 // Include C++ defined types
-#include "Contact.hpp"
-#include "EmailAddress.hpp"
-#include "HybridContactInterfaceSpec.hpp"
-#include "PhoneNumber.hpp"
-#include <future>
+#include "HybridContactSpec.hpp"
 #include <memory>
-#include <optional>
-#include <string>
-#include <vector>
 
 // C++ helpers for Swift
 #include "NitroContact-Swift-Cxx-Bridge.hpp"
@@ -38,8 +25,8 @@ namespace margelo::nitro::margeloContact { struct PhoneNumber; }
 #include <NitroModules/PromiseHolder.hpp>
 
 // Forward declarations of Swift defined types
-// Forward declaration of `HybridContactInterfaceSpecCxx` to properly resolve imports.
-namespace NitroContact { class HybridContactInterfaceSpecCxx; }
+// Forward declaration of `HybridContactSpecCxx` to properly resolve imports.
+namespace NitroContact { class HybridContactSpecCxx; }
 
 // Include Swift defined types
 #if __has_include("NitroContact-Swift.h")

@@ -1,49 +1,50 @@
 //
-//  HybridContact.swift
-//  NitroContact
+//  HybridTestObjectSwift.swift
+//  NitroImage
 //
 
 import Foundation
 import NitroModules
 import Contacts
+import ContactsUI
+
+import Contacts
+import Foundation
 
 class HybridContact: HybridContactSpec {
     public var hybridContext = margelo.nitro.HybridContext()
+    
     public var memorySize: Int {
-      return getSizeOf(self)
+        return getSizeOf(self)
     }
     
-    public func getAll(_ keys: [String]) throws -> [ContactInterface] {
-        let store = CNContactStore()
-        let fetchRequest = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
-        var contacts: [ContactInterface] = []
+    // func getAll() -> [[String: Any]] {
+    func getAll() {
+        let contactStore = CNContactStore()
+        var contacts: [[String: Any]] = []
         
-//        try store.enumerateContacts(with: fetchRequest) { (cnContact, _) in
-//            var contact = ContactInterface()
-//            
-//            if keys.contains(CNContactGivenNameKey) {
-//                contact.firstName = cnContact.givenName
-//            }
-//            if keys.contains(CNContactFamilyNameKey) {
-//                contact.lastName = cnContact.familyName
-//            }
-//            if keys.contains(CNContactPhoneNumbersKey) {
-//                contact.phoneNumbers = cnContact.phoneNumbers.map {
-//                    PhoneNumber(label: $0.label ?? "", value: $0.value.stringValue)
-//                }
-//            }
-//            if keys.contains(CNContactEmailAddressesKey) {
-//                contact.emailAddresses = cnContact.emailAddresses.map {
-//                    EmailAddress(label: $0.label ?? "", value: $0.value as String)
-//                }
-//            }
-//            if keys.contains(CNContactThumbnailImageDataKey) {
-//                contact.thumbnail = cnContact.thumbnailImageData?.base64EncodedString()
-//            }
-//            
-//            contacts.append(contact)
-//        }
+        let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey, CNContactEmailAddressesKey]
+        let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
         
-        return contacts
+        do {
+            try contactStore.enumerateContacts(with: request) { (contact, stopPointer) in
+                var contactDict: [String: Any] = [:]
+                
+                contactDict["firstName"] = contact.givenName
+                contactDict["lastName"] = contact.familyName
+                
+                let phoneNumbers = contact.phoneNumbers.map { $0.value.stringValue }
+                contactDict["phoneNumbers"] = phoneNumbers
+                
+                let emailAddresses = contact.emailAddresses.map { $0.value as String }
+                contactDict["emailAddresses"] = emailAddresses
+                
+                contacts.append(contactDict)
+            }
+        } catch {
+            print("Error fetching contacts: \(error)")
+        }
+        print("Contacts: \(contacts)")
+        // return contacts
     }
 }

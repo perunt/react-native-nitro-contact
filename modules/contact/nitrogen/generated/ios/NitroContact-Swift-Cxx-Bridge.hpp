@@ -8,38 +8,10 @@
 #pragma once
 
 // Forward declarations of C++ defined types
-// Forward declaration of `Contact` to properly resolve imports.
-namespace margelo::nitro::margeloContact { struct Contact; }
-// Forward declaration of `EmailAddress` to properly resolve imports.
-namespace margelo::nitro::margeloContact { struct EmailAddress; }
-// Forward declaration of `PhoneNumber` to properly resolve imports.
-namespace margelo::nitro::margeloContact { struct PhoneNumber; }
+
 
 // Include C++ defined types
-#if __has_include("Contact.hpp")
- #include "Contact.hpp"
-#endif
-#if __has_include("EmailAddress.hpp")
- #include "EmailAddress.hpp"
-#endif
-#if __has_include("PhoneNumber.hpp")
- #include "PhoneNumber.hpp"
-#endif
-#if __has_include(<NitroModules/PromiseHolder.hpp>)
- #include <NitroModules/PromiseHolder.hpp>
-#endif
-#if __has_include(<future>)
- #include <future>
-#endif
-#if __has_include(<optional>)
- #include <optional>
-#endif
-#if __has_include(<string>)
- #include <string>
-#endif
-#if __has_include(<vector>)
- #include <vector>
-#endif
+
 
 /**
  * Contains specialized versions of C++ templated types so they can be accessed from Swift,
@@ -47,76 +19,6 @@ namespace margelo::nitro::margeloContact { struct PhoneNumber; }
  */
 namespace margelo::nitro::margeloContact::bridge::swift {
 
-  /**
-   * Specialized version of `std::optional<std::string>`.
-   */
-  using std__optional_std__string_ = std::optional<std::string>;
-  inline std::optional<std::string> create_std__optional_std__string_(const std::string& value) {
-    return std::optional<std::string>(value);
-  }
   
-  /**
-   * Specialized version of `std::vector<PhoneNumber>`.
-   */
-  using std__vector_PhoneNumber_ = std::vector<PhoneNumber>;
-  inline std::vector<PhoneNumber> create_std__vector_PhoneNumber_(size_t size) {
-    std::vector<PhoneNumber> vector;
-    vector.reserve(size);
-    return vector;
-  }
-  
-  /**
-   * Specialized version of `std::optional<std::vector<PhoneNumber>>`.
-   */
-  using std__optional_std__vector_PhoneNumber__ = std::optional<std::vector<PhoneNumber>>;
-  inline std::optional<std::vector<PhoneNumber>> create_std__optional_std__vector_PhoneNumber__(const std::vector<PhoneNumber>& value) {
-    return std::optional<std::vector<PhoneNumber>>(value);
-  }
-  
-  /**
-   * Specialized version of `std::vector<EmailAddress>`.
-   */
-  using std__vector_EmailAddress_ = std::vector<EmailAddress>;
-  inline std::vector<EmailAddress> create_std__vector_EmailAddress_(size_t size) {
-    std::vector<EmailAddress> vector;
-    vector.reserve(size);
-    return vector;
-  }
-  
-  /**
-   * Specialized version of `std::optional<std::vector<EmailAddress>>`.
-   */
-  using std__optional_std__vector_EmailAddress__ = std::optional<std::vector<EmailAddress>>;
-  inline std::optional<std::vector<EmailAddress>> create_std__optional_std__vector_EmailAddress__(const std::vector<EmailAddress>& value) {
-    return std::optional<std::vector<EmailAddress>>(value);
-  }
-  
-  /**
-   * Specialized version of `std::vector<Contact>`.
-   */
-  using std__vector_Contact_ = std::vector<Contact>;
-  inline std::vector<Contact> create_std__vector_Contact_(size_t size) {
-    std::vector<Contact> vector;
-    vector.reserve(size);
-    return vector;
-  }
-  
-  /**
-   * Specialized version of `PromiseHolder<std::vector<Contact>>`.
-   */
-  using PromiseHolder_std__vector_Contact__ = PromiseHolder<std::vector<Contact>>;
-  inline PromiseHolder<std::vector<Contact>> create_PromiseHolder_std__vector_Contact__() {
-    return PromiseHolder<std::vector<Contact>>();
-  }
-  
-  /**
-   * Specialized version of `std::vector<std::string>`.
-   */
-  using std__vector_std__string_ = std::vector<std::string>;
-  inline std::vector<std::string> create_std__vector_std__string_(size_t size) {
-    std::vector<std::string> vector;
-    vector.reserve(size);
-    return vector;
-  }
 
 } // namespace margelo::nitro::margeloContact::bridge::swift

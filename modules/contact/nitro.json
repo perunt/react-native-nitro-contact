@@ -7,6 +7,11 @@
     "androidNamespace": ["margeloContact"],
     "androidCxxLibName": "NitroContact"
   },
-  "autolinking": {},
+  "autolinking": {
+    "Contact": {
+      "swift": "HybridContact",
+      "kotlin": "HybridContact"
+    }
+  },
   "ignorePaths": ["node_modules"]
 }
