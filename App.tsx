@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -18,13 +10,7 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 import {NitroContact} from './modules/contact/src/index';
 // import {NitroContact} from '@modules/contact';
@@ -54,14 +40,15 @@ function App(): React.JSX.Element {
           <Button
             title="Press me"
             onPress={() => {
-              // const test = NitroContact.getAll([
-              //   'firstName',
-              //   'lastName',
-              //   'phoneNumbers',
-              //   'emailAddresses',
-              // ]);
-              const test = NitroContact.getAll();
-              console.log('Pressed', test);
+              const test = NitroContact.getAll([
+                'firstName',
+                'lastName',
+                // 'phoneNumbers',
+                // 'emailAddresses',
+              ]);
+              // 'imageData',
+              // 'thumbnailImageData',
+              console.log('Pressed:', test);
             }}
           />
         </View>

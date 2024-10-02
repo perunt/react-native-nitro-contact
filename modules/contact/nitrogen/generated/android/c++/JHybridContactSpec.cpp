@@ -7,9 +7,14 @@
 
 #include "JHybridContactSpec.hpp"
 
+// Forward declaration of `ContactData` to properly resolve imports.
+namespace margelo::nitro::margeloContact { struct ContactData; }
 
-
-
+#include <vector>
+#include "ContactData.hpp"
+#include "JContactData.hpp"
+#include <optional>
+#include <string>
 
 namespace margelo::nitro::margeloContact {
 
@@ -32,9 +37,27 @@ namespace margelo::nitro::margeloContact {
   
 
   // Methods
-  void JHybridContactSpec::getAll() {
-    static const auto method = _javaPart->getClass()->getMethod<void()>("getAll");
-    method(_javaPart);
+  std::vector<ContactData> JHybridContactSpec::getAll(const std::vector<std::string>& keys) {
+    static const auto method = _javaPart->getClass()->getMethod<jni::local_ref<jni::JArrayClass<JContactData>>(jni::alias_ref<jni::JArrayClass<jni::JString>> /* keys */)>("getAll");
+    auto result = method(_javaPart, [&]() {
+      size_t size = keys.size();
+      jni::local_ref<jni::JArrayClass<jni::JString>> array = jni::JArrayClass<jni::JString>::newArray(size);
+      for (size_t i = 0; i < size; i++) {
+        const auto& element = keys[i];
+        array->setElement(i, *jni::make_jstring(element));
+      }
+      return array;
+    }());
+    return [&]() {
+      size_t size = result->size();
+      std::vector<ContactData> vector;
+      vector.reserve(size);
+      for (size_t i = 0; i < size; i++) {
+        auto element = result->getElement(i);
+        vector.push_back(element->toCpp());
+      }
+      return vector;
+    }();
   }
 
 } // namespace margelo::nitro::margeloContact

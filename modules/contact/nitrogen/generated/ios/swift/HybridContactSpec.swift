@@ -32,7 +32,7 @@ public protocol HybridContactSpec: HybridObjectSpec {
   
 
   // Methods
-  func getAll() throws -> Void
+  func getAll(keys: [String]) throws -> [ContactData]
 }
 
 public extension HybridContactSpec {

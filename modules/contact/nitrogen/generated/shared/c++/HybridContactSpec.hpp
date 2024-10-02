@@ -13,9 +13,12 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
+// Forward declaration of `ContactData` to properly resolve imports.
+namespace margelo::nitro::margeloContact { struct ContactData; }
 
-
-
+#include <vector>
+#include "ContactData.hpp"
+#include <string>
 
 namespace margelo::nitro::margeloContact {
 
@@ -45,7 +48,7 @@ namespace margelo::nitro::margeloContact {
 
     public:
       // Methods
-      virtual void getAll() = 0;
+      virtual std::vector<ContactData> getAll(const std::vector<std::string>& keys) = 0;
 
     protected:
       // Hybrid Setup

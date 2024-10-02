@@ -38,7 +38,7 @@ abstract class HybridContactSpec: HybridObject() {
   // Methods
   @DoNotStrip
   @Keep
-  abstract fun getAll(): Unit
+  abstract fun getAll(keys: Array<String>): Array<ContactData>
 
   private external fun initHybrid(): HybridData
 

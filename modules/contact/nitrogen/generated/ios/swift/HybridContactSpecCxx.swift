@@ -63,10 +63,16 @@ public final class HybridContactSpecCxx {
 
   // Methods
   @inline(__always)
-  public func getAll() -> Void {
+  public func getAll(keys: bridge.std__vector_std__string_) -> bridge.std__vector_ContactData_ {
     do {
-      try self.implementation.getAll()
-      return 
+      let result = try self.implementation.getAll(keys: keys.map({ val in String(val) }))
+      return { () -> bridge.std__vector_ContactData_ in
+        var vector = bridge.create_std__vector_ContactData_(result.count)
+        for item in result {
+          vector.push_back(item)
+        }
+        return vector
+      }()
     } catch {
       let message = "\(error.localizedDescription)"
       fatalError("Swift errors can currently not be propagated to C++! See https://github.com/swiftlang/swift/issues/75290 (Error: \(message))")

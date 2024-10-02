@@ -8,12 +8,18 @@
 #pragma once
 
 // Forward declarations of C++ defined types
+// Forward declaration of `ContactData` to properly resolve imports.
+namespace margelo::nitro::margeloContact { struct ContactData; }
 // Forward declaration of `HybridContactSpec` to properly resolve imports.
 namespace margelo::nitro::margeloContact { class HybridContactSpec; }
 
 // Include C++ defined types
+#include "ContactData.hpp"
 #include "HybridContactSpec.hpp"
 #include <memory>
+#include <optional>
+#include <string>
+#include <vector>
 
 // C++ helpers for Swift
 #include "NitroContact-Swift-Cxx-Bridge.hpp"

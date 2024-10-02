@@ -11,10 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		537B90BDD4984AB93849D97D /* libPods-NitroContactModule-NitroContactModuleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BCA0EA8182C5225DF168365 /* libPods-NitroContactModule-NitroContactModuleTests.a */; };
 		7CD735401A000C6DAD7A0BF4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 538CCE09BD907EE4327B6E24 /* PrivacyInfo.xcprivacy */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		BF803F91A8455C8D817A9874 /* libPods-NitroContactModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACE8D88D07AD48699F73FC51 /* libPods-NitroContactModule.a */; };
+		9DD31704976FF44210C73723 /* libPods-NitroContactModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E609DF6A07955568174FFE15 /* libPods-NitroContactModule.a */; };
+		AA37B59954736031F5689B8A /* libPods-NitroContactModule-NitroContactModuleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BC6F210A098A873FE82648 /* libPods-NitroContactModule-NitroContactModuleTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,15 +38,15 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = NitroContactModule/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = NitroContactModule/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = NitroContactModule/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		1D235308F40DA26DD662814F /* Pods-NitroContactModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule.release.xcconfig"; path = "Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule.release.xcconfig"; sourceTree = "<group>"; };
-		3BCA0EA8182C5225DF168365 /* libPods-NitroContactModule-NitroContactModuleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NitroContactModule-NitroContactModuleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20B5BC788B19CDE9C09A9339 /* Pods-NitroContactModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule.release.xcconfig"; path = "Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule.release.xcconfig"; sourceTree = "<group>"; };
 		538CCE09BD907EE4327B6E24 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = NitroContactModule/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = NitroContactModule/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ACE8D88D07AD48699F73FC51 /* libPods-NitroContactModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NitroContactModule.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D98378D793ECEA999F10F61F /* Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig"; path = "Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig"; sourceTree = "<group>"; };
-		DE44544DFD445D017D46AABC /* Pods-NitroContactModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule.debug.xcconfig"; path = "Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule.debug.xcconfig"; sourceTree = "<group>"; };
+		81BC6F210A098A873FE82648 /* libPods-NitroContactModule-NitroContactModuleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NitroContactModule-NitroContactModuleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3707781EC6E3A762498878F /* Pods-NitroContactModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule.debug.xcconfig"; path = "Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule.debug.xcconfig"; sourceTree = "<group>"; };
+		BA58F595B956A618C9EB8AC0 /* Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig"; path = "Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig"; sourceTree = "<group>"; };
+		E609DF6A07955568174FFE15 /* libPods-NitroContactModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NitroContactModule.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		EFBA08D2AFBEAAE13686B865 /* Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig"; path = "Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F49CBF587882BE486F3BBA1F /* Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig"; path = "Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				537B90BDD4984AB93849D97D /* libPods-NitroContactModule-NitroContactModuleTests.a in Frameworks */,
+				AA37B59954736031F5689B8A /* libPods-NitroContactModule-NitroContactModuleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF803F91A8455C8D817A9874 /* libPods-NitroContactModule.a in Frameworks */,
+				9DD31704976FF44210C73723 /* libPods-NitroContactModule.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				ACE8D88D07AD48699F73FC51 /* libPods-NitroContactModule.a */,
-				3BCA0EA8182C5225DF168365 /* libPods-NitroContactModule-NitroContactModuleTests.a */,
+				E609DF6A07955568174FFE15 /* libPods-NitroContactModule.a */,
+				81BC6F210A098A873FE82648 /* libPods-NitroContactModule-NitroContactModuleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,10 +145,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DE44544DFD445D017D46AABC /* Pods-NitroContactModule.debug.xcconfig */,
-				1D235308F40DA26DD662814F /* Pods-NitroContactModule.release.xcconfig */,
-				EFBA08D2AFBEAAE13686B865 /* Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig */,
-				D98378D793ECEA999F10F61F /* Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig */,
+				A3707781EC6E3A762498878F /* Pods-NitroContactModule.debug.xcconfig */,
+				20B5BC788B19CDE9C09A9339 /* Pods-NitroContactModule.release.xcconfig */,
+				F49CBF587882BE486F3BBA1F /* Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig */,
+				BA58F595B956A618C9EB8AC0 /* Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -160,12 +160,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NitroContactModuleTests" */;
 			buildPhases = (
-				4B594803F810500B21E0B295 /* [CP] Check Pods Manifest.lock */,
+				A3E02FF64DC4B11A5BA9DFAD /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				676D55531FED151654D3888D /* [CP] Embed Pods Frameworks */,
-				FB92E8BE6DA11B3FDB872C1E /* [CP] Copy Pods Resources */,
+				706D814FCB12AEF796C107FF /* [CP] Embed Pods Frameworks */,
+				0F0BFF2C8F5642F31D7FD6F0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -181,13 +181,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "NitroContactModule" */;
 			buildPhases = (
-				D5E2273C81A316117DC11626 /* [CP] Check Pods Manifest.lock */,
+				B8A8C9F0D9BE7464772123E3 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				69F038B19DCE38EC93EA8C0D /* [CP] Embed Pods Frameworks */,
-				45D31691C3FACF0F1BF9F807 /* [CP] Copy Pods Resources */,
+				9CD5767AD07C67B9F5AB56CF /* [CP] Embed Pods Frameworks */,
+				D9C87632BF47B1BAA087BBF8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,24 +271,58 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		45D31691C3FACF0F1BF9F807 /* [CP] Copy Pods Resources */ = {
+		0F0BFF2C8F5642F31D7FD6F0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4B594803F810500B21E0B295 /* [CP] Check Pods Manifest.lock */ = {
+		706D814FCB12AEF796C107FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CD5767AD07C67B9F5AB56CF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3E02FF64DC4B11A5BA9DFAD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -310,41 +344,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		676D55531FED151654D3888D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		69F038B19DCE38EC93EA8C0D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D5E2273C81A316117DC11626 /* [CP] Check Pods Manifest.lock */ = {
+		B8A8C9F0D9BE7464772123E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -366,21 +366,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FB92E8BE6DA11B3FDB872C1E /* [CP] Copy Pods Resources */ = {
+		D9C87632BF47B1BAA087BBF8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule-NitroContactModuleTests/Pods-NitroContactModule-NitroContactModuleTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NitroContactModule/Pods-NitroContactModule-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -416,7 +416,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFBA08D2AFBEAAE13686B865 /* Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig */;
+			baseConfigurationReference = F49CBF587882BE486F3BBA1F /* Pods-NitroContactModule-NitroContactModuleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -443,7 +443,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D98378D793ECEA999F10F61F /* Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig */;
+			baseConfigurationReference = BA58F595B956A618C9EB8AC0 /* Pods-NitroContactModule-NitroContactModuleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -467,7 +467,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE44544DFD445D017D46AABC /* Pods-NitroContactModule.debug.xcconfig */;
+			baseConfigurationReference = A3707781EC6E3A762498878F /* Pods-NitroContactModule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -495,7 +495,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D235308F40DA26DD662814F /* Pods-NitroContactModule.release.xcconfig */;
+			baseConfigurationReference = 20B5BC788B19CDE9C09A9339 /* Pods-NitroContactModule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

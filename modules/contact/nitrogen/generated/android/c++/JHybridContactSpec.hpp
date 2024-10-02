@@ -42,7 +42,7 @@ namespace margelo::nitro::margeloContact {
 
   public:
     // Methods
-    void getAll() override;
+    std::vector<ContactData> getAll(const std::vector<std::string>& keys) override;
 
   private:
     friend HybridBase;
