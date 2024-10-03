@@ -1,4 +1,4 @@
-package com.margelo.nitro.margeloContact;
+package com.margelo.nitro.contacts;
 
 import android.util.Log;
 

@@ -8,7 +8,7 @@
 #include <jni.h>
 #include <NitroModules/NitroDefines.hpp>
 
-namespace margelo::nitro::margeloContact {
+namespace margelo::nitro::contacts {
 
   /**
    * Initializes the native (C++) part of NitroContact, and autolinks all Hybrid Objects.
@@ -16,10 +16,10 @@ namespace margelo::nitro::margeloContact {
    * Example:
    * ```cpp (cpp-adapter.cpp)
    * JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void*) {
-   *   return margelo::nitro::margeloContact::initialize(vm);
+   *   return margelo::nitro::contacts::initialize(vm);
    * }
    * ```
    */
   int initialize(JavaVM* vm);
 
-} // namespace margelo::nitro::margeloContact
+} // namespace margelo::nitro::contacts

@@ -35,10 +35,15 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-  namespace "com.margelo.nitro.margeloContact"
+  namespace "com.margelo.nitro.contacts"
 
   ndkVersion getExtOrDefault("ndkVersion")
   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+
+  // packagingOptions {
+    // exclude 'lib/arm64-v8a/libreact_nativemodule_core.so'
+    //  pickFirst 'lib/**/libreact_nativemodule_core.so'
+  // }
 
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
@@ -83,6 +88,7 @@ android {
   sourceSets {
     main {
       if (isNewArchitectureEnabled()) {
+          // "/Users/terryperun/Projects/Mr/NitroContactModule/modules/contact/android",
         java.srcDirs += [
           // React Codegen files
           "${project.buildDir}/generated/source/codegen/java"

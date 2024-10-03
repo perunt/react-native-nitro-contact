@@ -1,16 +1,16 @@
 {
-  "cxxNamespace": ["margeloContact"],
+  "cxxNamespace": ["contacts"],
   "ios": {
     "iosModulename": "NitroContact"
   },
   "android": {
-    "androidNamespace": ["margeloContact"],
+    "androidNamespace": ["contacts"],
     "androidCxxLibName": "NitroContact"
   },
   "autolinking": {
-    "Contact": {
-      "swift": "HybridContact",
-      "kotlin": "HybridContact"
+    "ContactTest": {
+      "swift": "HybridContactTest",
+      "kotlin": "HybridContactTest"
     }
   },
   "ignorePaths": ["node_modules"]

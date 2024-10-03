@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -12,15 +12,30 @@ import {
 
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
-import {NitroContact} from './modules/contact/src/index';
+import {NitroContact} from './modules/contact/src';
 // import {NitroContact} from '@modules/contact';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const [data, setData] = useState([]);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  function fetchContacts() {
+    // const contacts = NitroContact.getAll([
+    //   'firstName',
+    //   'lastName',
+    //   // 'phoneNumbers',
+    //   'emailAddresses',
+    //   // 'imageData',
+    //   'thumbnailImageData',
+    // ]);
+    const contacts = NitroContact.getAll();
+    // setData(c);
+    console.log('Pressed:', contacts);
+  }
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -37,18 +52,15 @@ function App(): React.JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Text style={styles.highlight}>App.tsx</Text>
+          <Button title="Press me" onPress={fetchContacts} />
+          <Text
+            style={{color: 'white', alignSelf: 'center', marginVertical: 80}}>
+            {data.length}
+          </Text>
           <Button
-            title="Press me"
+            title="Reset"
             onPress={() => {
-              const test = NitroContact.getAll([
-                'firstName',
-                'lastName',
-                // 'phoneNumbers',
-                // 'emailAddresses',
-              ]);
-              // 'imageData',
-              // 'thumbnailImageData',
-              console.log('Pressed:', test);
+              setData([]);
             }}
           />
         </View>

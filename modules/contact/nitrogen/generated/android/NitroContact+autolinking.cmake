@@ -27,9 +27,9 @@ target_sources(
   # Autolinking Setup
   ../nitrogen/generated/android/NitroContactOnLoad.cpp
   # Shared Nitrogen C++ sources
-  ../nitrogen/generated/shared/c++/HybridContactSpec.cpp
+  ../nitrogen/generated/shared/c++/HybridContactTestSpec.cpp
   # Android-specific Nitrogen C++ sources
-  ../nitrogen/generated/android/c++/JHybridContactSpec.cpp
+  ../nitrogen/generated/android/c++/JHybridContactTestSpec.cpp
 )
 
 # Add all libraries required by the generated specs
