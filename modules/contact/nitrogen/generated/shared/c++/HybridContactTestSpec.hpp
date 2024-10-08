@@ -24,9 +24,12 @@ namespace margelo::nitro::contacts {
   /**
    * An abstract base class for `ContactTest`
    * Inherit this class to create instances of `HybridContactTestSpec` in C++.
+   * You must explicitly call `HybridObject`'s constructor yourself, because it is virtual.
    * @example
    * ```cpp
    * class HybridContactTest: public HybridContactTestSpec {
+   * public:
+   *   HybridContactTest(...): HybridObject(TAG) { ... }
    *   // ...
    * };
    * ```

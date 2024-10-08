@@ -11,18 +11,21 @@
 #include <fbjni/fbjni.h>
 #include "HybridContactTestSpec.hpp"
 
+
+
+
 namespace margelo::nitro::contacts {
 
   using namespace facebook;
 
-  class JHybridContactTestSpec final: public jni::HybridClass<JHybridContactTestSpec, JHybridObject>,
-                                      public HybridContactTestSpec {
+  class JHybridContactTestSpec: public jni::HybridClass<JHybridContactTestSpec, JHybridObject>,
+                                public virtual HybridContactTestSpec {
   public:
     static auto constexpr kJavaDescriptor = "Lcom/margelo/nitro/contacts/HybridContactTestSpec;";
     static jni::local_ref<jhybriddata> initHybrid(jni::alias_ref<jhybridobject> jThis);
     static void registerNatives();
 
-  private:
+  protected:
     // C++ constructor (called from Java via `initHybrid()`)
     explicit JHybridContactTestSpec(jni::alias_ref<jhybridobject> jThis) :
       HybridObject(HybridContactTestSpec::TAG),
