@@ -60,44 +60,30 @@ class HybridContactTest : HybridContactTestSpec() {
                 ContactsContract.Contacts.PHOTO_URI,
                 ContactsContract.Contacts.PHOTO_THUMBNAIL_URI,
                 ContactsContract.Data.DATA1,
-                ContactsContract.Data.DATA2,
-                ContactsContract.Data.DATA3
+                ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME,
+                ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME,
+                ContactsContract.CommonDataKinds.StructuredName.MIDDLE_NAME
             )
 
             val selection = StringBuilder()
             val selectionArgs = mutableListOf<String>()
 
-            if (keys.isNotEmpty()) {
-                selection.append("${ContactsContract.Data.MIMETYPE} IN (")
-                keys.forEachIndexed { index, key ->
-                    when (key) {
-                        "firstName", "lastName", "middleName" -> {
-                            if (index > 0) selection.append(",")
-                            selection.append("?")
-                            selectionArgs.add(ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                        }
-                        "phoneNumbers" -> {
-                            if (index > 0) selection.append(",")
-                            selection.append("?")
-                            selectionArgs.add(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                        }
-                        "emailAddresses" -> {
-                            if (index > 0) selection.append(",")
-                            selection.append("?")
-                            selectionArgs.add(ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
-                        }
-                    }
-                }
-                selection.append(")")
-            }
+            // Always include these MIME types
+            selectionArgs.addAll(listOf(
+                ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE,
+                ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
+                ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE
+            ))
+
+            selection.append("${ContactsContract.Data.MIMETYPE} IN (?, ?, ?)")
 
             val sortOrder = "${ContactsContract.Data.CONTACT_ID} ASC"
 
             val cursor = resolver.query(
                 ContactsContract.Data.CONTENT_URI,
                 projection,
-                if (selection.isNotEmpty()) selection.toString() else null,
-                if (selectionArgs.isNotEmpty()) selectionArgs.toTypedArray() else null,
+                selection.toString(),
+                selectionArgs.toTypedArray(),
                 sortOrder
             )
 
@@ -108,8 +94,9 @@ class HybridContactTest : HybridContactTestSpec() {
                 val photoUriIndex = it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI)
                 val thumbnailUriIndex = it.getColumnIndex(ContactsContract.Contacts.PHOTO_THUMBNAIL_URI)
                 val data1Index = it.getColumnIndex(ContactsContract.Data.DATA1)
-                val data2Index = it.getColumnIndex(ContactsContract.Data.DATA2)
-                val data3Index = it.getColumnIndex(ContactsContract.Data.DATA3)
+                val givenNameIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)
+                val familyNameIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)
+                val middleNameIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.MIDDLE_NAME)
 
                 var currentContact: ContactData? = null
                 var currentContactId: String? = null
@@ -118,44 +105,62 @@ class HybridContactTest : HybridContactTestSpec() {
 
                 while (it.moveToNext()) {
                     val contactId = it.getString(contactIdIndex)
+                    val mimeType = it.getString(mimeTypeIndex)
+
                     if (contactId != currentContactId) {
-                        currentContact?.let { contact -> contacts.add(contact) }
-                        val displayName = it.getString(displayNameIndex) ?: ""
-                        val nameParts = displayName.split(" ")
+                        currentContact?.let { contact ->
+                            contacts.add(contact.copy(
+                                phoneNumbers = currentPhoneNumbers.toTypedArray(),
+                                emailAddresses = currentEmailAddresses.toTypedArray()
+                            ))
+                        }
                         currentPhoneNumbers.clear()
                         currentEmailAddresses.clear()
                         currentContact = ContactData(
-                            firstName = nameParts.firstOrNull() ?: "",
-                            lastName = nameParts.lastOrNull()?.takeIf { it != nameParts.firstOrNull() } ?: "",
-                            middleName = if (nameParts.size > 2) nameParts.subList(1, nameParts.size - 1).joinToString(" ") else null,
-                            phoneNumbers = emptyArray(),  // Will be set later
-                            emailAddresses = emptyArray(),  // Will be set later
+                            firstName = "",
+                            lastName = "",
+                            middleName = null,
+                            phoneNumbers = emptyArray(),
+                            emailAddresses = emptyArray(),
                             imageData = it.getString(photoUriIndex) ?: "",
                             thumbnailImageData = it.getString(thumbnailUriIndex) ?: ""
                         )
                         currentContactId = contactId
                     }
 
-                    when (it.getString(mimeTypeIndex)) {
+                    when (mimeType) {
+                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE -> {
+                            currentContact = currentContact?.copy(
+                                firstName = it.getString(givenNameIndex) ?: "",
+                                lastName = it.getString(familyNameIndex) ?: "",
+                                middleName = it.getString(middleNameIndex)
+                            )
+                        }
                         ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> {
-                            it.getString(data1Index)?.let { phone -> currentPhoneNumbers.add(phone) }
+                            it.getString(data1Index)?.let { phone ->
+                                currentPhoneNumbers.add(phone)
+                            }
                         }
                         ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE -> {
-                            it.getString(data1Index)?.let { email -> currentEmailAddresses.add(email) }
+                            it.getString(data1Index)?.let { email ->
+                                currentEmailAddresses.add(email)
+                            }
                         }
                     }
-                    currentContact = currentContact?.copy(
+                }
+                currentContact?.let { contact ->
+                    contacts.add(contact.copy(
                         phoneNumbers = currentPhoneNumbers.toTypedArray(),
                         emailAddresses = currentEmailAddresses.toTypedArray()
-                    )
+                    ))
                 }
-                currentContact?.let { contact -> contacts.add(contact) }
             }
         }
 
         val endTime = System.currentTimeMillis()
         val executionTime = endTime - startTime
         Log.d("HybridContactTest", "getAll execution time: $executionTime ms")
+        Log.d("HybridContactTest", "Total contacts retrieved: ${contacts.size}")
 
         return contacts.toTypedArray()
     }
