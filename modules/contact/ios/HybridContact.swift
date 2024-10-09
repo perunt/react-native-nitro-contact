@@ -16,38 +16,40 @@ class HybridContact: HybridContactSpec {
         try? FileManager.default.createDirectory(at: imageDirectory, withIntermediateDirectories: true)
     }
     
-    func getAll(keys: [String]) throws -> [ContactData] {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        let keysSet = Set(keys)
-        
-        let fieldToKeyDescriptor: [String: CNKeyDescriptor] = [
-            "firstName": CNContactGivenNameKey as CNKeyDescriptor,
-            "lastName": CNContactFamilyNameKey as CNKeyDescriptor,
-            "phoneNumbers": CNContactPhoneNumbersKey as CNKeyDescriptor,
-            "emailAddresses": CNContactEmailAddressesKey as CNKeyDescriptor,
-            "middleName": CNContactMiddleNameKey as CNKeyDescriptor,
-            "imageData": CNContactImageDataKey as CNKeyDescriptor,
-            "thumbnailImageData": CNContactThumbnailImageDataKey as CNKeyDescriptor,
-            "givenNameKey": CNContactGivenNameKey as CNKeyDescriptor
-        ]
-        
-        let keysToFetch = keys.compactMap { fieldToKeyDescriptor[$0] }
-        guard !keysToFetch.isEmpty else { return [] }
-        
-        let request = CNContactFetchRequest(keysToFetch: keysToFetch)
-        var contacts: [ContactData] = []
-        
-        try contactStore.enumerateContacts(with: request) { (contact, _) in
-            autoreleasepool {
-                let contactData = self.processContact(contact, keysSet: keysSet)
-                contacts.append(contactData)
+    func getAll(keys: [String]) throws -> Promise<[ContactData]> {
+        return Promise.async {
+            let startTime = CFAbsoluteTimeGetCurrent()
+            let keysSet = Set(keys)
+            
+            let fieldToKeyDescriptor: [String: CNKeyDescriptor] = [
+                "firstName": CNContactGivenNameKey as CNKeyDescriptor,
+                "lastName": CNContactFamilyNameKey as CNKeyDescriptor,
+                "phoneNumbers": CNContactPhoneNumbersKey as CNKeyDescriptor,
+                "emailAddresses": CNContactEmailAddressesKey as CNKeyDescriptor,
+                "middleName": CNContactMiddleNameKey as CNKeyDescriptor,
+                "imageData": CNContactImageDataKey as CNKeyDescriptor,
+                "thumbnailImageData": CNContactThumbnailImageDataKey as CNKeyDescriptor,
+                "givenNameKey": CNContactGivenNameKey as CNKeyDescriptor
+            ]
+            
+            let keysToFetch = keys.compactMap { fieldToKeyDescriptor[$0] }
+            guard !keysToFetch.isEmpty else { return [] }
+            
+            let request = CNContactFetchRequest(keysToFetch: keysToFetch)
+            var contacts: [ContactData] = []
+            
+            try self.contactStore.enumerateContacts(with: request) { (contact, _) in
+                autoreleasepool {
+                    let contactData = self.processContact(contact, keysSet: keysSet)
+                    contacts.append(contactData)
+                }
             }
+            
+            let end = CFAbsoluteTimeGetCurrent()
+            let duration = (end - startTime) * 1000
+            print("Duration: \(duration)ms")
+            return contacts
         }
-        
-        let end = CFAbsoluteTimeGetCurrent()
-        let duration = (end - startTime) * 1000
-        print("Duration: \(duration)ms")
-        return contacts
     }
     
     private func processContact(_ contact: CNContact, keysSet: Set<String>) -> ContactData {
