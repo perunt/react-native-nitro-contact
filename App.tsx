@@ -15,7 +15,7 @@ import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import {NitroContact} from './modules/contact/src';
 // import {NitroContact} from '@modules/contact';
 
-// import Contacts from '@s77rt/react-native-contacts';
+import Contacts from '@s77rt/react-native-contacts';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -43,9 +43,10 @@ function App(): React.JSX.Element {
         const endTime = performance.now();
         const duration = endTime - startTime;
 
-        console.log(`Fetched ${contacts.length} contacts`);
-        console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
+        console.log(`Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(2)} milliseconds`);
+        // console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
         // console.log('Pressed:', contacts.length);
+        setData(duration)
       })
       .catch(error => {
         const endTime = performance.now();
@@ -66,9 +67,10 @@ function App(): React.JSX.Element {
         const endTime = performance.now();
         const duration = endTime - startTime;
 
-        console.log(`Fetched ${contacts.length} contacts`);
-        console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
+        console.log(`Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(2)} milliseconds`);
+        // console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
         // console.log('Pressed:', contacts.length);
+        setData(duration)
       })
       .catch(error => {
         const endTime = performance.now();
@@ -95,7 +97,6 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Text style={styles.highlight}>App.tsx</Text>
           <Button title="Press me" onPress={fetchContacts} />
           <Button
             title="Press me"
@@ -104,7 +105,7 @@ function App(): React.JSX.Element {
           />
           <Text
             style={{color: 'white', alignSelf: 'center', marginVertical: 80}}>
-            {data.length}
+            {data}
           </Text>
           <Button
             title="Reset"
