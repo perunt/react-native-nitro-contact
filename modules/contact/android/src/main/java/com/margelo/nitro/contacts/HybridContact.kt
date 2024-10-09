@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import com.facebook.react.bridge.ReactApplicationContext
 import com.margelo.nitro.NitroModules
 
-class HybridContactTest : HybridContactTestSpec() {
+class HybridContact : HybridContactSpec() {
     override val memorySize: Long
         get() = estimateMemorySize()
 
@@ -159,8 +159,8 @@ class HybridContactTest : HybridContactTestSpec() {
 
         val endTime = System.currentTimeMillis()
         val executionTime = endTime - startTime
-        Log.d("HybridContactTest", "getAll execution time: $executionTime ms")
-        Log.d("HybridContactTest", "Total contacts retrieved: ${contacts.size}")
+        Log.d("HybridContact", "getAll execution time: $executionTime ms")
+        Log.d("HybridContact", "Total contacts retrieved: ${contacts.size}")
 
         return contacts.toTypedArray()
     }

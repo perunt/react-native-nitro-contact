@@ -11,7 +11,7 @@
 #include <fbjni/fbjni.h>
 #include <NitroModules/HybridObjectRegistry.hpp>
 
-#include "JHybridContactTestSpec.hpp"
+#include "JHybridContactSpec.hpp"
 #include <NitroModules/JNISharedPtr.hpp>
 
 namespace margelo::nitro::contacts {
@@ -23,23 +23,23 @@ int initialize(JavaVM* vm) {
 
   return facebook::jni::initialize(vm, [] {
     // Register native JNI methods
-    margelo::nitro::contacts::JHybridContactTestSpec::registerNatives();
+    margelo::nitro::contacts::JHybridContactSpec::registerNatives();
 
     // Register Nitro Hybrid Objects
     HybridObjectRegistry::registerHybridObjectConstructor(
-      "ContactTest",
+      "Contact",
       []() -> std::shared_ptr<HybridObject> {
-        static auto javaClass = jni::findClassStatic("com/margelo/nitro/contacts/HybridContactTest");
-        static auto defaultConstructor = javaClass->getConstructor<JHybridContactTestSpec::javaobject()>();
+        static auto javaClass = jni::findClassStatic("com/margelo/nitro/contacts/HybridContact");
+        static auto defaultConstructor = javaClass->getConstructor<JHybridContactSpec::javaobject()>();
     
         auto instance = javaClass->newObject(defaultConstructor);
     #ifdef NITRO_DEBUG
         if (instance == nullptr) [[unlikely]] {
-          throw std::runtime_error("Failed to create an instance of \"JHybridContactTestSpec\" - the constructor returned null!");
+          throw std::runtime_error("Failed to create an instance of \"JHybridContactSpec\" - the constructor returned null!");
         }
     #endif
         auto globalRef = jni::make_global(instance);
-        return JNISharedPtr::make_shared_from_jni<JHybridContactTestSpec>(globalRef);
+        return JNISharedPtr::make_shared_from_jni<JHybridContactSpec>(globalRef);
       }
     );
   });

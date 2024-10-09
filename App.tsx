@@ -15,6 +15,8 @@ import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import {NitroContact} from './modules/contact/src';
 // import {NitroContact} from '@modules/contact';
 
+import Contacts from '@s77rt/react-native-contacts';
+
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
@@ -24,17 +26,37 @@ function App(): React.JSX.Element {
   };
 
   function fetchContacts() {
-    // const contacts = NitroContact.getAll([
-    //   'firstName',
-    //   'lastName',
-    //   // 'phoneNumbers',
-    //   'emailAddresses',
-    //   // 'imageData',
-    //   'thumbnailImageData',
-    // ]);
-    const contacts = NitroContact.getAll();
-    // setData(c);
-    console.log('Pressed:', contacts);
+    const startTime = performance.now();
+    const contacts = NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses']);
+    const endTime = performance.now();
+    const duration = endTime - startTime;
+
+    console.log(`Fetched ${contacts.length} contacts`);
+    console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
+    setData(contacts);
+  }
+  function fetchContactsCompare() {
+    const startTime = performance.now();
+    Contacts.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses'])
+      // Contacts.getAll(['firstName', 'lastName'])
+      .then(contacts => {
+        // console.log(contacts);
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+
+        console.log(`Fetched ${contacts.length} contacts`);
+        console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
+        // console.log('Pressed:', contacts.length);
+      })
+      .catch(error => {
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+
+        console.error(
+          `Error occurred after ${duration.toFixed(2)} milliseconds:`,
+          error,
+        );
+      });
   }
 
   return (
@@ -53,6 +75,11 @@ function App(): React.JSX.Element {
           }}>
           <Text style={styles.highlight}>App.tsx</Text>
           <Button title="Press me" onPress={fetchContacts} />
+          <Button
+            title="Press me"
+            onPress={fetchContactsCompare}
+            style={{marginTop: 20}}
+          />
           <Text
             style={{color: 'white', alignSelf: 'center', marginVertical: 80}}>
             {data.length}

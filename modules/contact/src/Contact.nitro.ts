@@ -10,7 +10,7 @@ interface ContactData {
   thumbnailImageData?: string
 }
 
-export interface ContactTest
+export interface Contact
   extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
   getAll(keys: string[]): ContactData[]
 }
