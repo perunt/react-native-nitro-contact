@@ -16,6 +16,7 @@
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
 
+#include <future>
 #include <vector>
 #include "ContactData.hpp"
 #include <string>
@@ -51,7 +52,7 @@ namespace margelo::nitro::contacts {
 
     public:
       // Methods
-      virtual std::vector<ContactData> getAll(const std::vector<std::string>& keys) = 0;
+      virtual std::future<std::vector<ContactData>> getAll(const std::vector<std::string>& keys) = 0;
 
     protected:
       // Hybrid Setup

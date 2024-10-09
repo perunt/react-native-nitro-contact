@@ -15,8 +15,10 @@ namespace NitroContact { class HybridContactSpecCxx; }
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
 
+#include <future>
 #include <vector>
 #include "ContactData.hpp"
+#include <NitroModules/PromiseHolder.hpp>
 #include <optional>
 #include <string>
 
@@ -63,9 +65,9 @@ namespace margelo::nitro::contacts {
 
   public:
     // Methods
-    inline std::vector<ContactData> getAll(const std::vector<std::string>& keys) override {
+    inline std::future<std::vector<ContactData>> getAll(const std::vector<std::string>& keys) override {
       auto __result = _swiftPart.getAll(keys);
-      return __result;
+      return __result.getFuture();
     }
 
   private:

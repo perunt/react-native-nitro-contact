@@ -75,15 +75,21 @@ public class HybridContactSpecCxx {
 
   // Methods
   @inline(__always)
-  public func getAll(keys: bridge.std__vector_std__string_) -> bridge.std__vector_ContactData_ {
+  public func getAll(keys: bridge.std__vector_std__string_) -> bridge.PromiseHolder_std__vector_ContactData__ {
     do {
       let result = try self.implementation.getAll(keys: keys.map({ val in String(val) }))
-      return { () -> bridge.std__vector_ContactData_ in
-        var vector = bridge.create_std__vector_ContactData_(result.count)
-        for item in result {
+      return { () -> bridge.PromiseHolder_std__vector_ContactData__ in
+        let promiseHolder = bridge.create_PromiseHolder_std__vector_ContactData__()
+        result
+          .then({ __result in promiseHolder.resolve({ () -> bridge.std__vector_ContactData_ in
+        var vector = bridge.create_std__vector_ContactData_(__result.count)
+        for item in __result {
           vector.push_back(item)
         }
         return vector
+      }()) })
+          .catch({ __error in promiseHolder.reject(std.string(String(describing: __error))) })
+        return promiseHolder
       }()
     } catch {
       let message = "\(error.localizedDescription)"

@@ -32,7 +32,7 @@ public protocol HybridContactSpec: AnyObject, HybridObjectSpec {
   
 
   // Methods
-  func getAll(keys: [String]) throws -> [ContactData]
+  func getAll(keys: [String]) throws -> Promise<[ContactData]>
 }
 
 public extension HybridContactSpec {

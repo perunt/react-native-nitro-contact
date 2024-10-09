@@ -12,5 +12,5 @@ interface ContactData {
 
 export interface Contact
   extends HybridObject<{ ios: 'swift'; android: 'kotlin' }> {
-  getAll(keys: string[]): ContactData[]
+  getAll(keys: string[]): Promise<ContactData[]>
 }

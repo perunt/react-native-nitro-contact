@@ -10,8 +10,10 @@
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
 
+#include <future>
 #include <vector>
 #include "ContactData.hpp"
+#include <NitroModules/JPromise.hpp>
 #include "JContactData.hpp"
 #include <optional>
 #include <string>
@@ -37,8 +39,8 @@ namespace margelo::nitro::contacts {
   
 
   // Methods
-  std::vector<ContactData> JHybridContactSpec::getAll(const std::vector<std::string>& keys) {
-    static const auto method = _javaPart->getClass()->getMethod<jni::local_ref<jni::JArrayClass<JContactData>>(jni::alias_ref<jni::JArrayClass<jni::JString>> /* keys */)>("getAll");
+  std::future<std::vector<ContactData>> JHybridContactSpec::getAll(const std::vector<std::string>& keys) {
+    static const auto method = _javaPart->getClass()->getMethod<jni::local_ref<JPromise::javaobject>(jni::alias_ref<jni::JArrayClass<jni::JString>> /* keys */)>("getAll");
     auto result = method(_javaPart, [&]() {
       size_t size = keys.size();
       jni::local_ref<jni::JArrayClass<jni::JString>> array = jni::JArrayClass<jni::JString>::newArray(size);
@@ -49,14 +51,25 @@ namespace margelo::nitro::contacts {
       return array;
     }());
     return [&]() {
-      size_t size = result->size();
-      std::vector<ContactData> vector;
-      vector.reserve(size);
-      for (size_t i = 0; i < size; i++) {
-        auto element = result->getElement(i);
-        vector.push_back(element->toCpp());
-      }
-      return vector;
+      auto promise = std::make_shared<std::promise<std::vector<ContactData>>>();
+      result->cthis()->addOnResolvedListener([=](const jni::alias_ref<jni::JObject>& boxedResult) {
+        auto result = jni::static_ref_cast<jni::JArrayClass<JContactData>>(boxedResult);
+        promise->set_value([&]() {
+          size_t size = result->size();
+          std::vector<ContactData> vector;
+          vector.reserve(size);
+          for (size_t i = 0; i < size; i++) {
+            auto element = result->getElement(i);
+            vector.push_back(element->toCpp());
+          }
+          return vector;
+        }());
+      });
+      result->cthis()->addOnRejectedListener([=](const jni::alias_ref<jni::JString>& message) {
+        std::runtime_error error(message->toStdString());
+        promise->set_exception(std::make_exception_ptr(error));
+      });
+      return promise->get_future();
     }();
   }
 

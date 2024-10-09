@@ -16,6 +16,7 @@ namespace margelo::nitro::contacts { class HybridContactSpec; }
 // Include C++ defined types
 #include "ContactData.hpp"
 #include "HybridContactSpec.hpp"
+#include <future>
 #include <memory>
 #include <optional>
 #include <string>

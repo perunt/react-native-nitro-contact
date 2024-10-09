@@ -15,6 +15,12 @@ namespace margelo::nitro::contacts { struct ContactData; }
 #if __has_include("ContactData.hpp")
  #include "ContactData.hpp"
 #endif
+#if __has_include(<NitroModules/PromiseHolder.hpp>)
+ #include <NitroModules/PromiseHolder.hpp>
+#endif
+#if __has_include(<future>)
+ #include <future>
+#endif
 #if __has_include(<optional>)
  #include <optional>
 #endif
@@ -65,6 +71,14 @@ namespace margelo::nitro::contacts::bridge::swift {
     std::vector<ContactData> vector;
     vector.reserve(size);
     return vector;
+  }
+  
+  /**
+   * Specialized version of `PromiseHolder<std::vector<ContactData>>`.
+   */
+  using PromiseHolder_std__vector_ContactData__ = PromiseHolder<std::vector<ContactData>>;
+  inline PromiseHolder<std::vector<ContactData>> create_PromiseHolder_std__vector_ContactData__() {
+    return PromiseHolder<std::vector<ContactData>>();
   }
 
 } // namespace margelo::nitro::contacts::bridge::swift

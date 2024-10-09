@@ -15,7 +15,7 @@ import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import {NitroContact} from './modules/contact/src';
 // import {NitroContact} from '@modules/contact';
 
-import Contacts from '@s77rt/react-native-contacts';
+// import Contacts from '@s77rt/react-native-contacts';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -26,14 +26,36 @@ function App(): React.JSX.Element {
   };
 
   function fetchContacts() {
-    const startTime = performance.now();
-    const contacts = NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses']);
-    const endTime = performance.now();
-    const duration = endTime - startTime;
+    // const startTime = performance.now();
+    // const contacts = NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses']);
+    // const endTime = performance.now();
+    // const duration = endTime - startTime;
 
-    console.log(`Fetched ${contacts.length} contacts`);
-    console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
-    setData(contacts);
+    // console.log(`Fetched ${contacts.length} contacts`);
+    // console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
+    // setData(contacts);
+    /////// TODO:
+    const startTime = performance.now();
+    NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses'])
+      // Contacts.getAll(['firstName', 'lastName'])
+      .then(contacts => {
+        // console.log(contacts);
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+
+        console.log(`Fetched ${contacts.length} contacts`);
+        console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
+        // console.log('Pressed:', contacts.length);
+      })
+      .catch(error => {
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+
+        console.error(
+          `Error occurred after ${duration.toFixed(2)} milliseconds:`,
+          error,
+        );
+      });
   }
   function fetchContactsCompare() {
     const startTime = performance.now();

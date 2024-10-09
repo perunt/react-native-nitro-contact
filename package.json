@@ -11,7 +11,6 @@
     "nuke": " rm -rf node_modules && cd modules/contact && rm -rf nitrogen && cd android && rm -rf .cxx && cd ../../.. && npm i && cd modules/contact && npm run specs && cd ../.."
   },
   "dependencies": {
-    "@s77rt/react-native-contacts": "^0.1.1",
     "react": "18.3.1",
     "react-native": "0.75.3",
     "react-native-nitro-modules": "^0.11.0"
