@@ -1,5 +1,5 @@
 import { NitroModules } from 'react-native-nitro-modules'
-import type { ContactTest } from './ContactTest.nitro'
+import type { Contact } from './Contact.nitro'
 
 export const NitroContact =
-  NitroModules.createHybridObject<ContactTest>('ContactTest')
+  NitroModules.createHybridObject<Contact>('Contact')

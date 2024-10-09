@@ -10,7 +10,7 @@
 #import "NitroContact-Swift-Cxx-Umbrella.hpp"
 #import <type_traits>
 
-#include "HybridContactTestSpecSwift.hpp"
+#include "HybridContactSpecSwift.hpp"
 
 @interface NitroContactAutolinking : NSObject
 @end
@@ -22,10 +22,10 @@
   using namespace margelo::nitro::contacts;
 
   HybridObjectRegistry::registerHybridObjectConstructor(
-    "ContactTest",
+    "Contact",
     []() -> std::shared_ptr<HybridObject> {
-      auto swiftPart = NitroContact::NitroContactAutolinking::createContactTest();
-      return std::make_shared<HybridContactTestSpecSwift>(swiftPart);
+      auto swiftPart = NitroContact::NitroContactAutolinking::createContact();
+      return std::make_shared<HybridContactSpecSwift>(swiftPart);
     }
   );
 }

@@ -8,9 +8,9 @@
     "androidCxxLibName": "NitroContact"
   },
   "autolinking": {
-    "ContactTest": {
-      "swift": "HybridContactTest",
-      "kotlin": "HybridContactTest"
+    "Contact": {
+      "swift": "HybridContact",
+      "kotlin": "HybridContact"
     }
   },
   "ignorePaths": ["node_modules"]
