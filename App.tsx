@@ -16,37 +16,32 @@ import {NitroContact} from './modules/contact/src';
 // import {NitroContact} from '@modules/contact';
 
 import Contacts from '@s77rt/react-native-contacts';
+import {ContactFields} from './modules/contact/src/Contact.nitro';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
+  const [count, setCount] = useState(0);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   function fetchContacts() {
-    // const startTime = performance.now();
-    // const contacts = NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses']);
-    // const endTime = performance.now();
-    // const duration = endTime - startTime;
-
-    // console.log(`Fetched ${contacts.length} contacts`);
-    // console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
-    // setData(contacts);
-    /////// TODO:
     const startTime = performance.now();
-    NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses'])
-      // Contacts.getAll(['firstName', 'lastName'])
+    NitroContact.getAll([ContactFields.FIRST_NAME, ContactFields.LAST_NAME])
       .then(contacts => {
         // console.log(contacts);
         const endTime = performance.now();
         const duration = endTime - startTime;
 
-        console.log(`Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(2)} milliseconds`);
-        // console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
-        // console.log('Pressed:', contacts.length);
-        setData(duration)
+        console.log(
+          `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
+            2,
+          )} milliseconds`,
+        );
+        setData(duration);
+        setCount(contacts.length);
       })
       .catch(error => {
         const endTime = performance.now();
@@ -67,10 +62,14 @@ function App(): React.JSX.Element {
         const endTime = performance.now();
         const duration = endTime - startTime;
 
-        console.log(`Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(2)} milliseconds`);
+        console.log(
+          `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
+            2,
+          )} milliseconds`,
+        );
         // console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
         // console.log('Pressed:', contacts.length);
-        setData(duration)
+        setData(duration);
       })
       .catch(error => {
         const endTime = performance.now();
@@ -107,10 +106,15 @@ function App(): React.JSX.Element {
             style={{color: 'white', alignSelf: 'center', marginVertical: 80}}>
             {data}
           </Text>
+          <Text
+            style={{color: 'white', alignSelf: 'center', marginVertical: 80}}>
+            {count}
+          </Text>
           <Button
             title="Reset"
             onPress={() => {
               setData([]);
+              contacts(0);
             }}
           />
         </View>
