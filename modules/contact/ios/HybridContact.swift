@@ -10,15 +10,15 @@ final class HybridContact: HybridContactSpec {
     
     private let contactStore = CNContactStore()
     private let imageDirectory: URL
-    private let fieldToKeyDescriptor: [String: CNKeyDescriptor] = [
-        "firstName": CNContactGivenNameKey as CNKeyDescriptor,
-        "lastName": CNContactFamilyNameKey as CNKeyDescriptor,
-        "phoneNumbers": CNContactPhoneNumbersKey as CNKeyDescriptor,
-        "emailAddresses": CNContactEmailAddressesKey as CNKeyDescriptor,
-        "middleName": CNContactMiddleNameKey as CNKeyDescriptor,
-        "imageData": CNContactImageDataKey as CNKeyDescriptor,
-        "thumbnailImageData": CNContactThumbnailImageDataKey as CNKeyDescriptor,
-        "givenNameKey": CNContactGivenNameKey as CNKeyDescriptor
+    private let fieldToKeyDescriptor: [ContactFields: CNKeyDescriptor] = [
+        .firstName: CNContactGivenNameKey as CNKeyDescriptor,
+        .lastName: CNContactFamilyNameKey as CNKeyDescriptor,
+        .phoneNumbers: CNContactPhoneNumbersKey as CNKeyDescriptor,
+        .emailAddresses: CNContactEmailAddressesKey as CNKeyDescriptor,
+        .middleName: CNContactMiddleNameKey as CNKeyDescriptor,
+        .imageData: CNContactImageDataKey as CNKeyDescriptor,
+        .thumbnailImageData: CNContactThumbnailImageDataKey as CNKeyDescriptor,
+        .givenNameKey: CNContactGivenNameKey as CNKeyDescriptor
     ]
     
     init() {
@@ -26,7 +26,7 @@ final class HybridContact: HybridContactSpec {
         try? FileManager.default.createDirectory(at: imageDirectory, withIntermediateDirectories: true)
     }
     
-    func getAll(keys: [String]) throws -> Promise<[ContactData]> {
+    func getAll(keys: [ContactFields]) throws -> Promise<[ContactData]> {
         return Promise.async { [unowned self] in
             let keysSet = Set(keys)
             
@@ -46,15 +46,15 @@ final class HybridContact: HybridContactSpec {
     }
     
     @inline(__always)
-    private func processContact(_ contact: CNContact, keysSet: Set<String>) -> ContactData {
+    private func processContact(_ contact: CNContact, keysSet: Set<ContactFields>) -> ContactData {
         ContactData(
-            firstName: keysSet.contains("firstName") ? contact.givenName : "",
-            lastName: keysSet.contains("lastName") ? contact.familyName : "",
-            middleName: keysSet.contains("middleName") ? contact.middleName : nil,
-            phoneNumbers: keysSet.contains("phoneNumbers") ? contact.phoneNumbers.map({ $0.value.stringValue }) : [],
-            emailAddresses: keysSet.contains("emailAddresses") ? contact.emailAddresses.map({ $0.value as String }) : [],
-            imageData: keysSet.contains("imageData") ? getImagePath(for: contact, isThumbnail: false) : nil,
-            thumbnailImageData: keysSet.contains("thumbnailImageData") ? getImagePath(for: contact, isThumbnail: true) : nil
+            firstName: keysSet.contains(.firstName) ? contact.givenName : "",
+            lastName: keysSet.contains(.lastName) ? contact.familyName : "",
+            middleName: keysSet.contains(.middleName) ? contact.middleName : nil,
+            phoneNumbers: keysSet.contains(.phoneNumbers) ? contact.phoneNumbers.map({ $0.value.stringValue }) : [],
+            emailAddresses: keysSet.contains(.emailAddresses) ? contact.emailAddresses.map({ $0.value as String }) : [],
+            imageData: keysSet.contains(.imageData) ? getImagePath(for: contact, isThumbnail: false) : nil,
+            thumbnailImageData: keysSet.contains(.thumbnailImageData) ? getImagePath(for: contact, isThumbnail: true) : nil
         )
     }
     
