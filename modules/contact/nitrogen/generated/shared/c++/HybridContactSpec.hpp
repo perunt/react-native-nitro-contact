@@ -15,11 +15,13 @@
 
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
+// Forward declaration of `ContactFields` to properly resolve imports.
+namespace margelo::nitro::contacts { enum class ContactFields; }
 
 #include <future>
 #include <vector>
 #include "ContactData.hpp"
-#include <string>
+#include "ContactFields.hpp"
 
 namespace margelo::nitro::contacts {
 
@@ -52,7 +54,7 @@ namespace margelo::nitro::contacts {
 
     public:
       // Methods
-      virtual std::future<std::vector<ContactData>> getAll(const std::vector<std::string>& keys) = 0;
+      virtual std::future<std::vector<ContactData>> getAll(const std::vector<ContactFields>& keys) = 0;
 
     protected:
       // Hybrid Setup

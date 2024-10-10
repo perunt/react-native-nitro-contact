@@ -10,10 +10,15 @@
 // Forward declarations of C++ defined types
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
+// Forward declaration of `ContactFields` to properly resolve imports.
+namespace margelo::nitro::contacts { enum class ContactFields; }
 
 // Include C++ defined types
 #if __has_include("ContactData.hpp")
  #include "ContactData.hpp"
+#endif
+#if __has_include("ContactFields.hpp")
+ #include "ContactFields.hpp"
 #endif
 #if __has_include(<NitroModules/PromiseHolder.hpp>)
  #include <NitroModules/PromiseHolder.hpp>
@@ -79,6 +84,16 @@ namespace margelo::nitro::contacts::bridge::swift {
   using PromiseHolder_std__vector_ContactData__ = PromiseHolder<std::vector<ContactData>>;
   inline PromiseHolder<std::vector<ContactData>> create_PromiseHolder_std__vector_ContactData__() {
     return PromiseHolder<std::vector<ContactData>>();
+  }
+  
+  /**
+   * Specialized version of `std::vector<ContactFields>`.
+   */
+  using std__vector_ContactFields_ = std::vector<ContactFields>;
+  inline std::vector<ContactFields> create_std__vector_ContactFields_(size_t size) {
+    std::vector<ContactFields> vector;
+    vector.reserve(size);
+    return vector;
   }
 
 } // namespace margelo::nitro::contacts::bridge::swift

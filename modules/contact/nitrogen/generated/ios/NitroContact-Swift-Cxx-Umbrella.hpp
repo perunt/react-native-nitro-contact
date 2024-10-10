@@ -10,11 +10,14 @@
 // Forward declarations of C++ defined types
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
+// Forward declaration of `ContactFields` to properly resolve imports.
+namespace margelo::nitro::contacts { enum class ContactFields; }
 // Forward declaration of `HybridContactSpec` to properly resolve imports.
 namespace margelo::nitro::contacts { class HybridContactSpec; }
 
 // Include C++ defined types
 #include "ContactData.hpp"
+#include "ContactFields.hpp"
 #include "HybridContactSpec.hpp"
 #include <future>
 #include <memory>
