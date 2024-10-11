@@ -1807,6 +1807,11 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
+"@s77rt/react-native-contacts@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/@s77rt/react-native-contacts/-/react-native-contacts-0.1.1.tgz"
+  integrity sha512-5N+yK3vdDP9yYdKoxuPeHRFgBIuZYeCCrvScCmTgS6MVWrDQWLHb/3Go2dz/yfLBk2lWLc9la8/uRL8ufTaYPg==
+
 "@sideway/address@^4.1.5":
   version "4.1.5"
   resolved "https://registry.npmjs.org/@sideway/address/-/address-4.1.5.tgz"
