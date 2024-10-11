@@ -42,7 +42,7 @@ class HybridContact : HybridContactSpec() {
         return permissionStatus == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun getAll(keys: Array<String>): Promise<Array<ContactData>> {
+    override fun getAll(keys: Array<ContactFields>): Promise<Array<ContactData>> {
         return Promise.async {
             if (!hasPhoneContactsPermission()) {
                 requestContactPermission()
@@ -68,7 +68,6 @@ class HybridContact : HybridContactSpec() {
                 val selection = StringBuilder()
                 val selectionArgs = mutableListOf<String>()
 
-                // Always include these MIME types
                 selectionArgs.addAll(listOf(
                     ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE,
                     ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
@@ -90,7 +89,6 @@ class HybridContact : HybridContactSpec() {
                 cursor?.use {
                     val mimeTypeIndex = it.getColumnIndex(ContactsContract.Data.MIMETYPE)
                     val contactIdIndex = it.getColumnIndex(ContactsContract.Data.CONTACT_ID)
-                    val displayNameIndex = it.getColumnIndex(ContactsContract.Data.DISPLAY_NAME)
                     val photoUriIndex = it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI)
                     val thumbnailUriIndex = it.getColumnIndex(ContactsContract.Contacts.PHOTO_THUMBNAIL_URI)
                     val data1Index = it.getColumnIndex(ContactsContract.Data.DATA1)
@@ -100,8 +98,8 @@ class HybridContact : HybridContactSpec() {
 
                     var currentContact: ContactData? = null
                     var currentContactId: String? = null
-                    val currentPhoneNumbers = mutableListOf<String>()
-                    val currentEmailAddresses = mutableListOf<String>()
+                    val currentPhoneNumbers = mutableListOf<StringHolder>()
+                    val currentEmailAddresses = mutableListOf<StringHolder>()
 
                     while (it.moveToNext()) {
                         val contactId = it.getString(contactIdIndex)
@@ -138,12 +136,12 @@ class HybridContact : HybridContactSpec() {
                             }
                             ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> {
                                 it.getString(data1Index)?.let { phone ->
-                                    currentPhoneNumbers.add(phone)
+                                    currentPhoneNumbers.add(StringHolder(phone))
                                 }
                             }
                             ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE -> {
                                 it.getString(data1Index)?.let { email ->
-                                    currentEmailAddresses.add(email)
+                                    currentEmailAddresses.add(StringHolder(email))
                                 }
                             }
                         }
