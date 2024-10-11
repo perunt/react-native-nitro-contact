@@ -7,7 +7,11 @@
 
 #pragma once
 
-#include <cmath>
+#if __has_include(<NitroModules/NitroHash.hpp>)
+#include <NitroModules/NitroHash.hpp>
+#else
+#error NitroModules cannot be found! Are you sure you installed NitroModules properly?
+#endif
 #if __has_include(<NitroModules/JSIConverter.hpp>)
 #include <NitroModules/JSIConverter.hpp>
 #else
@@ -22,7 +26,7 @@
 namespace margelo::nitro::contacts {
 
   /**
-   * An enum which can be represented as a JavaScript enum (ContactFields).
+   * An enum which can be represented as a JavaScript union (ContactFields).
    */
   enum class ContactFields {
     FIRST_NAME      SWIFT_NAME(firstName) = 0,
@@ -41,29 +45,57 @@ namespace margelo::nitro {
 
   using namespace margelo::nitro::contacts;
 
-  // C++ ContactFields <> JS ContactFields (enum)
+  // C++ ContactFields <> JS ContactFields (union)
   template <>
   struct JSIConverter<ContactFields> {
     static inline ContactFields fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
-      int enumValue = JSIConverter<int>::fromJSI(runtime, arg);
-      return static_cast<ContactFields>(enumValue);
+      std::string unionValue = JSIConverter<std::string>::fromJSI(runtime, arg);
+      switch (hashString(unionValue.c_str(), unionValue.size())) {
+        case hashString("FIRST_NAME"): return ContactFields::FIRST_NAME;
+        case hashString("LAST_NAME"): return ContactFields::LAST_NAME;
+        case hashString("MIDDLE_NAME"): return ContactFields::MIDDLE_NAME;
+        case hashString("PHONE_NUMBERS"): return ContactFields::PHONE_NUMBERS;
+        case hashString("EMAIL_ADDRESSES"): return ContactFields::EMAIL_ADDRESSES;
+        case hashString("IMAGE_DATA"): return ContactFields::IMAGE_DATA;
+        case hashString("THUMBNAIL_IMAGE_DATA"): return ContactFields::THUMBNAIL_IMAGE_DATA;
+        case hashString("GIVEN_NAME_KEY"): return ContactFields::GIVEN_NAME_KEY;
+        default: [[unlikely]]
+          throw std::runtime_error("Cannot convert \"" + unionValue + "\" to enum ContactFields - invalid value!");
+      }
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, ContactFields arg) {
-      int enumValue = static_cast<int>(arg);
-      return JSIConverter<int>::toJSI(runtime, enumValue);
+      switch (arg) {
+        case ContactFields::FIRST_NAME: return JSIConverter<std::string>::toJSI(runtime, "FIRST_NAME");
+        case ContactFields::LAST_NAME: return JSIConverter<std::string>::toJSI(runtime, "LAST_NAME");
+        case ContactFields::MIDDLE_NAME: return JSIConverter<std::string>::toJSI(runtime, "MIDDLE_NAME");
+        case ContactFields::PHONE_NUMBERS: return JSIConverter<std::string>::toJSI(runtime, "PHONE_NUMBERS");
+        case ContactFields::EMAIL_ADDRESSES: return JSIConverter<std::string>::toJSI(runtime, "EMAIL_ADDRESSES");
+        case ContactFields::IMAGE_DATA: return JSIConverter<std::string>::toJSI(runtime, "IMAGE_DATA");
+        case ContactFields::THUMBNAIL_IMAGE_DATA: return JSIConverter<std::string>::toJSI(runtime, "THUMBNAIL_IMAGE_DATA");
+        case ContactFields::GIVEN_NAME_KEY: return JSIConverter<std::string>::toJSI(runtime, "GIVEN_NAME_KEY");
+        default: [[unlikely]]
+          throw std::runtime_error("Cannot convert ContactFields to JS - invalid value: "
+                                    + std::to_string(static_cast<int>(arg)) + "!");
+      }
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
-      if (!value.isNumber()) {
+      if (!value.isString()) {
         return false;
       }
-      double integer;
-      double fraction = modf(value.getNumber(), &integer);
-      if (fraction != 0.0) {
-        // It is some kind of floating point number - our enums are ints.
-        return false;
+      std::string unionValue = JSIConverter<std::string>::fromJSI(runtime, value);
+      switch (hashString(unionValue.c_str(), unionValue.size())) {
+        case hashString("FIRST_NAME"):
+        case hashString("LAST_NAME"):
+        case hashString("MIDDLE_NAME"):
+        case hashString("PHONE_NUMBERS"):
+        case hashString("EMAIL_ADDRESSES"):
+        case hashString("IMAGE_DATA"):
+        case hashString("THUMBNAIL_IMAGE_DATA"):
+        case hashString("GIVEN_NAME_KEY"):
+          return true;
+        default:
+          return false;
       }
-      // Check if we are within the bounds of the enum.
-      return integer >= 0 && integer <= 7;
     }
   };
 

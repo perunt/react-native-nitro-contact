@@ -9,6 +9,8 @@
 
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
+// Forward declaration of `StringHolder` to properly resolve imports.
+namespace margelo::nitro::contacts { struct StringHolder; }
 // Forward declaration of `ContactFields` to properly resolve imports.
 namespace margelo::nitro::contacts { enum class ContactFields; }
 
@@ -19,6 +21,8 @@ namespace margelo::nitro::contacts { enum class ContactFields; }
 #include "JContactData.hpp"
 #include <optional>
 #include <string>
+#include "StringHolder.hpp"
+#include "JStringHolder.hpp"
 #include "ContactFields.hpp"
 #include "JContactFields.hpp"
 

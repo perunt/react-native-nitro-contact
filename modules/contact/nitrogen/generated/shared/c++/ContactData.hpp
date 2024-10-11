@@ -18,11 +18,13 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
-
+// Forward declaration of `StringHolder` to properly resolve imports.
+namespace margelo::nitro::contacts { struct StringHolder; }
 
 #include <optional>
 #include <string>
 #include <vector>
+#include "StringHolder.hpp"
 
 namespace margelo::nitro::contacts {
 
@@ -34,13 +36,13 @@ namespace margelo::nitro::contacts {
     std::optional<std::string> firstName     SWIFT_PRIVATE;
     std::optional<std::string> lastName     SWIFT_PRIVATE;
     std::optional<std::string> middleName     SWIFT_PRIVATE;
-    std::optional<std::vector<std::string>> phoneNumbers     SWIFT_PRIVATE;
-    std::optional<std::vector<std::string>> emailAddresses     SWIFT_PRIVATE;
+    std::optional<std::vector<StringHolder>> phoneNumbers     SWIFT_PRIVATE;
+    std::optional<std::vector<StringHolder>> emailAddresses     SWIFT_PRIVATE;
     std::optional<std::string> imageData     SWIFT_PRIVATE;
     std::optional<std::string> thumbnailImageData     SWIFT_PRIVATE;
 
   public:
-    explicit ContactData(std::optional<std::string> firstName, std::optional<std::string> lastName, std::optional<std::string> middleName, std::optional<std::vector<std::string>> phoneNumbers, std::optional<std::vector<std::string>> emailAddresses, std::optional<std::string> imageData, std::optional<std::string> thumbnailImageData): firstName(firstName), lastName(lastName), middleName(middleName), phoneNumbers(phoneNumbers), emailAddresses(emailAddresses), imageData(imageData), thumbnailImageData(thumbnailImageData) {}
+    explicit ContactData(std::optional<std::string> firstName, std::optional<std::string> lastName, std::optional<std::string> middleName, std::optional<std::vector<StringHolder>> phoneNumbers, std::optional<std::vector<StringHolder>> emailAddresses, std::optional<std::string> imageData, std::optional<std::string> thumbnailImageData): firstName(firstName), lastName(lastName), middleName(middleName), phoneNumbers(phoneNumbers), emailAddresses(emailAddresses), imageData(imageData), thumbnailImageData(thumbnailImageData) {}
   };
 
 } // namespace margelo::nitro::contacts
@@ -58,8 +60,8 @@ namespace margelo::nitro {
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, "firstName")),
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, "lastName")),
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, "middleName")),
-        JSIConverter<std::optional<std::vector<std::string>>>::fromJSI(runtime, obj.getProperty(runtime, "phoneNumbers")),
-        JSIConverter<std::optional<std::vector<std::string>>>::fromJSI(runtime, obj.getProperty(runtime, "emailAddresses")),
+        JSIConverter<std::optional<std::vector<StringHolder>>>::fromJSI(runtime, obj.getProperty(runtime, "phoneNumbers")),
+        JSIConverter<std::optional<std::vector<StringHolder>>>::fromJSI(runtime, obj.getProperty(runtime, "emailAddresses")),
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, "imageData")),
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, "thumbnailImageData"))
       );
@@ -69,8 +71,8 @@ namespace margelo::nitro {
       obj.setProperty(runtime, "firstName", JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.firstName));
       obj.setProperty(runtime, "lastName", JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.lastName));
       obj.setProperty(runtime, "middleName", JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.middleName));
-      obj.setProperty(runtime, "phoneNumbers", JSIConverter<std::optional<std::vector<std::string>>>::toJSI(runtime, arg.phoneNumbers));
-      obj.setProperty(runtime, "emailAddresses", JSIConverter<std::optional<std::vector<std::string>>>::toJSI(runtime, arg.emailAddresses));
+      obj.setProperty(runtime, "phoneNumbers", JSIConverter<std::optional<std::vector<StringHolder>>>::toJSI(runtime, arg.phoneNumbers));
+      obj.setProperty(runtime, "emailAddresses", JSIConverter<std::optional<std::vector<StringHolder>>>::toJSI(runtime, arg.emailAddresses));
       obj.setProperty(runtime, "imageData", JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.imageData));
       obj.setProperty(runtime, "thumbnailImageData", JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.thumbnailImageData));
       return obj;
@@ -83,8 +85,8 @@ namespace margelo::nitro {
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, "firstName"))) return false;
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, "lastName"))) return false;
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, "middleName"))) return false;
-      if (!JSIConverter<std::optional<std::vector<std::string>>>::canConvert(runtime, obj.getProperty(runtime, "phoneNumbers"))) return false;
-      if (!JSIConverter<std::optional<std::vector<std::string>>>::canConvert(runtime, obj.getProperty(runtime, "emailAddresses"))) return false;
+      if (!JSIConverter<std::optional<std::vector<StringHolder>>>::canConvert(runtime, obj.getProperty(runtime, "phoneNumbers"))) return false;
+      if (!JSIConverter<std::optional<std::vector<StringHolder>>>::canConvert(runtime, obj.getProperty(runtime, "emailAddresses"))) return false;
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, "imageData"))) return false;
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, "thumbnailImageData"))) return false;
       return true;

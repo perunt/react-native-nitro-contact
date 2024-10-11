@@ -6,7 +6,7 @@
 ///
 
 /**
- * Represents the JS enum `ContactFields`, backed by a C++ enum.
+ * Represents the JS union `ContactFields`, backed by a C++ enum.
  */
 public typealias ContactFields = margelo.nitro.contacts.ContactFields
 

@@ -14,11 +14,14 @@ namespace margelo::nitro::contacts { struct ContactData; }
 namespace margelo::nitro::contacts { enum class ContactFields; }
 // Forward declaration of `HybridContactSpec` to properly resolve imports.
 namespace margelo::nitro::contacts { class HybridContactSpec; }
+// Forward declaration of `StringHolder` to properly resolve imports.
+namespace margelo::nitro::contacts { struct StringHolder; }
 
 // Include C++ defined types
 #include "ContactData.hpp"
 #include "ContactFields.hpp"
 #include "HybridContactSpec.hpp"
+#include "StringHolder.hpp"
 #include <future>
 #include <memory>
 #include <optional>

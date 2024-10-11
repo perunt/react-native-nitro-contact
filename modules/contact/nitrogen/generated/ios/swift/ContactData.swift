@@ -18,7 +18,7 @@ public extension ContactData {
   /**
    * Create a new instance of `ContactData`.
    */
-  init(firstName: String?, lastName: String?, middleName: String?, phoneNumbers: [String]?, emailAddresses: [String]?, imageData: String?, thumbnailImageData: String?) {
+  init(firstName: String?, lastName: String?, middleName: String?, phoneNumbers: [StringHolder]?, emailAddresses: [StringHolder]?, imageData: String?, thumbnailImageData: String?) {
     self.init({ () -> bridge.std__optional_std__string_ in
       if let actualValue = firstName {
         return bridge.create_std__optional_std__string_(std.string(actualValue))
@@ -37,24 +37,24 @@ public extension ContactData {
       } else {
         return .init()
       }
-    }(), { () -> bridge.std__optional_std__vector_std__string__ in
+    }(), { () -> bridge.std__optional_std__vector_StringHolder__ in
       if let actualValue = phoneNumbers {
-        return bridge.create_std__optional_std__vector_std__string__({ () -> bridge.std__vector_std__string_ in
-          var vector = bridge.create_std__vector_std__string_(actualValue.count)
+        return bridge.create_std__optional_std__vector_StringHolder__({ () -> bridge.std__vector_StringHolder_ in
+          var vector = bridge.create_std__vector_StringHolder_(actualValue.count)
           for item in actualValue {
-            vector.push_back(std.string(item))
+            vector.push_back(item)
           }
           return vector
         }())
       } else {
         return .init()
       }
-    }(), { () -> bridge.std__optional_std__vector_std__string__ in
+    }(), { () -> bridge.std__optional_std__vector_StringHolder__ in
       if let actualValue = emailAddresses {
-        return bridge.create_std__optional_std__vector_std__string__({ () -> bridge.std__vector_std__string_ in
-          var vector = bridge.create_std__vector_std__string_(actualValue.count)
+        return bridge.create_std__optional_std__vector_StringHolder__({ () -> bridge.std__vector_StringHolder_ in
+          var vector = bridge.create_std__vector_StringHolder_(actualValue.count)
           for item in actualValue {
-            vector.push_back(std.string(item))
+            vector.push_back(item)
           }
           return vector
         }())
@@ -145,12 +145,12 @@ public extension ContactData {
     }
   }
   
-  var phoneNumbers: [String]? {
+  var phoneNumbers: [StringHolder]? {
     @inline(__always)
     get {
-      return { () -> [String]? in
+      return { () -> [StringHolder]? in
         if let actualValue = self.__phoneNumbers.value {
-          return actualValue.map({ val in String(val) })
+          return actualValue.map({ val in val })
         } else {
           return nil
         }
@@ -158,12 +158,12 @@ public extension ContactData {
     }
     @inline(__always)
     set {
-      self.__phoneNumbers = { () -> bridge.std__optional_std__vector_std__string__ in
+      self.__phoneNumbers = { () -> bridge.std__optional_std__vector_StringHolder__ in
         if let actualValue = newValue {
-          return bridge.create_std__optional_std__vector_std__string__({ () -> bridge.std__vector_std__string_ in
-            var vector = bridge.create_std__vector_std__string_(actualValue.count)
+          return bridge.create_std__optional_std__vector_StringHolder__({ () -> bridge.std__vector_StringHolder_ in
+            var vector = bridge.create_std__vector_StringHolder_(actualValue.count)
             for item in actualValue {
-              vector.push_back(std.string(item))
+              vector.push_back(item)
             }
             return vector
           }())
@@ -174,12 +174,12 @@ public extension ContactData {
     }
   }
   
-  var emailAddresses: [String]? {
+  var emailAddresses: [StringHolder]? {
     @inline(__always)
     get {
-      return { () -> [String]? in
+      return { () -> [StringHolder]? in
         if let actualValue = self.__emailAddresses.value {
-          return actualValue.map({ val in String(val) })
+          return actualValue.map({ val in val })
         } else {
           return nil
         }
@@ -187,12 +187,12 @@ public extension ContactData {
     }
     @inline(__always)
     set {
-      self.__emailAddresses = { () -> bridge.std__optional_std__vector_std__string__ in
+      self.__emailAddresses = { () -> bridge.std__optional_std__vector_StringHolder__ in
         if let actualValue = newValue {
-          return bridge.create_std__optional_std__vector_std__string__({ () -> bridge.std__vector_std__string_ in
-            var vector = bridge.create_std__vector_std__string_(actualValue.count)
+          return bridge.create_std__optional_std__vector_StringHolder__({ () -> bridge.std__vector_StringHolder_ in
+            var vector = bridge.create_std__vector_StringHolder_(actualValue.count)
             for item in actualValue {
-              vector.push_back(std.string(item))
+              vector.push_back(item)
             }
             return vector
           }())

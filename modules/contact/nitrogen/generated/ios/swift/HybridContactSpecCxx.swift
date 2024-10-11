@@ -77,7 +77,7 @@ public class HybridContactSpecCxx {
   @inline(__always)
   public func getAll(keys: bridge.std__vector_ContactFields_) -> bridge.PromiseHolder_std__vector_ContactData__ {
     do {
-        let result = try self.implementation.getAll(keys: keys.map({ val in margelo.nitro.contacts.ContactFields(rawValue: val.rawValue)! }))
+      let result = try self.implementation.getAll(keys: keys.map({ val in margelo.nitro.contacts.ContactFields(rawValue: val.rawValue)! }))
       return { () -> bridge.PromiseHolder_std__vector_ContactData__ in
         let promiseHolder = bridge.create_PromiseHolder_std__vector_ContactData__()
         result
