@@ -4,9 +4,7 @@ import Foundation
 
 final class HybridContact: HybridContactSpec {
     public var hybridContext = margelo.nitro.HybridContext()
-    public var memorySize: Int {
-        return getSizeOf(self)
-    }
+    public var memorySize: Int { MemoryLayout<HybridContact>.size }
     
     private let contactStore = CNContactStore()
     private let imageDirectory: URL
@@ -27,9 +25,8 @@ final class HybridContact: HybridContactSpec {
     }
     
     func getAll(keys: [ContactFields]) throws -> Promise<[ContactData]> {
-        return Promise.async { [unowned self] in
+        Promise.async { [unowned self] in
             let keysSet = Set(keys)
-            
             let keysToFetch = keys.compactMap { self.fieldToKeyDescriptor[$0] }
             guard !keysToFetch.isEmpty else { return [] }
             
@@ -48,11 +45,11 @@ final class HybridContact: HybridContactSpec {
     @inline(__always)
     private func processContact(_ contact: CNContact, keysSet: Set<ContactFields>) -> ContactData {
         ContactData(
-            firstName: keysSet.contains(.firstName) ? contact.givenName : "",
-            lastName: keysSet.contains(.lastName) ? contact.familyName : "",
+            firstName: keysSet.contains(.firstName) ? contact.givenName : nil,
+            lastName: keysSet.contains(.lastName) ? contact.familyName : nil,
             middleName: keysSet.contains(.middleName) ? contact.middleName : nil,
-            phoneNumbers: keysSet.contains(.phoneNumbers) ? contact.phoneNumbers.map({ $0.value.stringValue }) : [],
-            emailAddresses: keysSet.contains(.emailAddresses) ? contact.emailAddresses.map({ $0.value as String }) : [],
+            phoneNumbers: keysSet.contains(.phoneNumbers) ? contact.phoneNumbers.map { StringHolder(value: $0.value.stringValue) } : nil,
+            emailAddresses: keysSet.contains(.emailAddresses) ? contact.emailAddresses.map { StringHolder(value: $0.value as String) } : nil,
             imageData: keysSet.contains(.imageData) ? getImagePath(for: contact, isThumbnail: false) : nil,
             thumbnailImageData: keysSet.contains(.thumbnailImageData) ? getImagePath(for: contact, isThumbnail: true) : nil
         )
