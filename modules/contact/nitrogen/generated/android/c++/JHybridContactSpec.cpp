@@ -9,6 +9,10 @@
 
 // Forward declaration of `ContactData` to properly resolve imports.
 namespace margelo::nitro::contacts { struct ContactData; }
+// Forward declaration of `StringHolder` to properly resolve imports.
+namespace margelo::nitro::contacts { struct StringHolder; }
+// Forward declaration of `ContactFields` to properly resolve imports.
+namespace margelo::nitro::contacts { enum class ContactFields; }
 
 #include <future>
 #include <vector>
@@ -17,6 +21,10 @@ namespace margelo::nitro::contacts { struct ContactData; }
 #include "JContactData.hpp"
 #include <optional>
 #include <string>
+#include "StringHolder.hpp"
+#include "JStringHolder.hpp"
+#include "ContactFields.hpp"
+#include "JContactFields.hpp"
 
 namespace margelo::nitro::contacts {
 
@@ -39,14 +47,14 @@ namespace margelo::nitro::contacts {
   
 
   // Methods
-  std::future<std::vector<ContactData>> JHybridContactSpec::getAll(const std::vector<std::string>& keys) {
-    static const auto method = _javaPart->getClass()->getMethod<jni::local_ref<JPromise::javaobject>(jni::alias_ref<jni::JArrayClass<jni::JString>> /* keys */)>("getAll");
+  std::future<std::vector<ContactData>> JHybridContactSpec::getAll(const std::vector<ContactFields>& keys) {
+    static const auto method = _javaPart->getClass()->getMethod<jni::local_ref<JPromise::javaobject>(jni::alias_ref<jni::JArrayClass<JContactFields>> /* keys */)>("getAll");
     auto result = method(_javaPart, [&]() {
       size_t size = keys.size();
-      jni::local_ref<jni::JArrayClass<jni::JString>> array = jni::JArrayClass<jni::JString>::newArray(size);
+      jni::local_ref<jni::JArrayClass<JContactFields>> array = jni::JArrayClass<JContactFields>::newArray(size);
       for (size_t i = 0; i < size; i++) {
         const auto& element = keys[i];
-        array->setElement(i, *jni::make_jstring(element));
+        array->setElement(i, *JContactFields::fromCpp(element));
       }
       return array;
     }());

@@ -19,8 +19,8 @@ data class ContactData(
   val firstName: String?,
   val lastName: String?,
   val middleName: String?,
-  val phoneNumbers: Array<String>?,
-  val emailAddresses: Array<String>?,
+  val phoneNumbers: Array<StringHolder>?,
+  val emailAddresses: Array<StringHolder>?,
   val imageData: String?,
   val thumbnailImageData: String?
 )

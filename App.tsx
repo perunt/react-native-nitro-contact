@@ -13,39 +13,32 @@ import {
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 import {NitroContact} from './modules/contact/src';
-// import {NitroContact} from '@modules/contact';
 
-// import Contacts from '@s77rt/react-native-contacts';
+import Contacts from '@s77rt/react-native-contacts';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
+  const [count, setCount] = useState(0);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   function fetchContacts() {
-    // const startTime = performance.now();
-    // const contacts = NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses']);
-    // const endTime = performance.now();
-    // const duration = endTime - startTime;
-
-    // console.log(`Fetched ${contacts.length} contacts`);
-    // console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
-    // setData(contacts);
-    /////// TODO:
     const startTime = performance.now();
-    NitroContact.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses'])
-      // Contacts.getAll(['firstName', 'lastName'])
+    NitroContact.getAll(['FIRST_NAME', 'LAST_NAME', 'PHONE_NUMBERS', 'EMAIL_ADDRESSES'])
       .then(contacts => {
-        // console.log(contacts);
         const endTime = performance.now();
         const duration = endTime - startTime;
 
-        console.log(`Fetched ${contacts.length} contacts`);
-        console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
-        // console.log('Pressed:', contacts.length);
+        console.log(
+          `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
+            2,
+          )} milliseconds`,
+        );
+        setData(duration);
+        setCount(contacts.length);
       })
       .catch(error => {
         const endTime = performance.now();
@@ -60,15 +53,16 @@ function App(): React.JSX.Element {
   function fetchContactsCompare() {
     const startTime = performance.now();
     Contacts.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses'])
-      // Contacts.getAll(['firstName', 'lastName'])
       .then(contacts => {
-        // console.log(contacts);
         const endTime = performance.now();
         const duration = endTime - startTime;
 
-        console.log(`Fetched ${contacts.length} contacts`);
-        console.log(`Time taken: ${duration.toFixed(2)} milliseconds`);
-        // console.log('Pressed:', contacts.length);
+        console.log(
+          `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
+            2,
+          )} milliseconds`,
+        );
+        setData(duration);
       })
       .catch(error => {
         const endTime = performance.now();
@@ -95,7 +89,6 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Text style={styles.highlight}>App.tsx</Text>
           <Button title="Press me" onPress={fetchContacts} />
           <Button
             title="Press me"
@@ -103,13 +96,18 @@ function App(): React.JSX.Element {
             style={{marginTop: 20}}
           />
           <Text
-            style={{color: 'white', alignSelf: 'center', marginVertical: 80}}>
-            {data.length}
+            style={{color: 'red', alignSelf: 'center', marginVertical: 80}}>
+            {data}
+          </Text>
+          <Text
+            style={{color: 'red', alignSelf: 'center', marginVertical: 80}}>
+            {count}
           </Text>
           <Button
             title="Reset"
             onPress={() => {
               setData([]);
+              contacts(0);
             }}
           />
         </View>
