@@ -14,7 +14,7 @@ import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 import {NitroContact} from './modules/contact/src';
 
-import Contacts from '@s77rt/react-native-contacts';
+// import Contacts from '@s77rt/react-native-contacts';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -27,52 +27,53 @@ function App(): React.JSX.Element {
 
   function fetchContacts() {
     const startTime = performance.now();
-    NitroContact.getAll(['FIRST_NAME', 'LAST_NAME', 'PHONE_NUMBERS', 'EMAIL_ADDRESSES'])
-      .then(contacts => {
-        const endTime = performance.now();
-        const duration = endTime - startTime;
+    // NitroContact.getAll(['FIRST_NAME', 'LAST_NAME', 'PHONE_NUMBERS', 'EMAIL_ADDRESSES'])
+    NitroContact.getAll()
+      // .then(contacts => {
+      //   const endTime = performance.now();
+      //   const duration = endTime - startTime;
 
-        console.log(
-          `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
-            2,
-          )} milliseconds`,
-        );
-        setData(duration);
-        setCount(contacts.length);
-      })
-      .catch(error => {
-        const endTime = performance.now();
-        const duration = endTime - startTime;
+      //   console.log(
+      //     `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
+      //       2,
+      //     )} milliseconds`,
+      //   );
+      //   setData(duration);
+      //   setCount(contacts.length);
+      // })
+      // .catch(error => {
+      //   const endTime = performance.now();
+      //   const duration = endTime - startTime;
 
-        console.error(
-          `Error occurred after ${duration.toFixed(2)} milliseconds:`,
-          error,
-        );
-      });
+      //   console.error(
+      //     `Error occurred after ${duration.toFixed(2)} milliseconds:`,
+      //     error,
+      //   );
+      // });
   }
   function fetchContactsCompare() {
     const startTime = performance.now();
-    Contacts.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses'])
-      .then(contacts => {
-        const endTime = performance.now();
-        const duration = endTime - startTime;
+    // Contacts.getAll(['firstName', 'lastName', 'phoneNumbers', 'emailAddresses'])
+    //   .then(contacts => {
+    //     const endTime = performance.now();
+    //     const duration = endTime - startTime;
 
-        console.log(
-          `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
-            2,
-          )} milliseconds`,
-        );
-        setData(duration);
-      })
-      .catch(error => {
-        const endTime = performance.now();
-        const duration = endTime - startTime;
+    //     console.log(
+    //       `Fetched ${contacts.length} contacts. Time taken: ${duration.toFixed(
+    //         2,
+    //       )} milliseconds`,
+    //     );
+    //     setData(duration);
+    //   })
+    //   .catch(error => {
+    //     const endTime = performance.now();
+    //     const duration = endTime - startTime;
 
-        console.error(
-          `Error occurred after ${duration.toFixed(2)} milliseconds:`,
-          error,
-        );
-      });
+    //     console.error(
+    //       `Error occurred after ${duration.toFixed(2)} milliseconds:`,
+    //       error,
+    //     );
+    //   });
   }
 
   return (

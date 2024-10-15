@@ -7,24 +7,9 @@
 
 #include "JHybridContactSpec.hpp"
 
-// Forward declaration of `ContactData` to properly resolve imports.
-namespace margelo::nitro::contacts { struct ContactData; }
-// Forward declaration of `StringHolder` to properly resolve imports.
-namespace margelo::nitro::contacts { struct StringHolder; }
-// Forward declaration of `ContactFields` to properly resolve imports.
-namespace margelo::nitro::contacts { enum class ContactFields; }
 
-#include <future>
-#include <vector>
-#include "ContactData.hpp"
-#include <NitroModules/JPromise.hpp>
-#include "JContactData.hpp"
-#include <optional>
-#include <string>
-#include "StringHolder.hpp"
-#include "JStringHolder.hpp"
-#include "ContactFields.hpp"
-#include "JContactFields.hpp"
+
+
 
 namespace margelo::nitro::contacts {
 
@@ -47,38 +32,10 @@ namespace margelo::nitro::contacts {
   
 
   // Methods
-  std::future<std::vector<ContactData>> JHybridContactSpec::getAll(const std::vector<ContactFields>& keys) {
-    static const auto method = _javaPart->getClass()->getMethod<jni::local_ref<JPromise::javaobject>(jni::alias_ref<jni::JArrayClass<JContactFields>> /* keys */)>("getAll");
-    auto result = method(_javaPart, [&]() {
-      size_t size = keys.size();
-      jni::local_ref<jni::JArrayClass<JContactFields>> array = jni::JArrayClass<JContactFields>::newArray(size);
-      for (size_t i = 0; i < size; i++) {
-        const auto& element = keys[i];
-        array->setElement(i, *JContactFields::fromCpp(element));
-      }
-      return array;
-    }());
-    return [&]() {
-      auto promise = std::make_shared<std::promise<std::vector<ContactData>>>();
-      result->cthis()->addOnResolvedListener([=](const jni::alias_ref<jni::JObject>& boxedResult) {
-        auto result = jni::static_ref_cast<jni::JArrayClass<JContactData>>(boxedResult);
-        promise->set_value([&]() {
-          size_t size = result->size();
-          std::vector<ContactData> vector;
-          vector.reserve(size);
-          for (size_t i = 0; i < size; i++) {
-            auto element = result->getElement(i);
-            vector.push_back(element->toCpp());
-          }
-          return vector;
-        }());
-      });
-      result->cthis()->addOnRejectedListener([=](const jni::alias_ref<jni::JString>& message) {
-        std::runtime_error error(message->toStdString());
-        promise->set_exception(std::make_exception_ptr(error));
-      });
-      return promise->get_future();
-    }();
+  bool JHybridContactSpec::getAll() {
+    static const auto method = _javaPart->getClass()->getMethod<jboolean()>("getAll");
+    auto result = method(_javaPart);
+    return result;
   }
 
 } // namespace margelo::nitro::contacts
