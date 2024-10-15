@@ -15,7 +15,8 @@
     "@s77rt/react-native-contacts": "^0.1.1",
     "react": "18.3.1",
     "react-native": "0.75.3",
-    "react-native-nitro-modules": "^0.11.0"
+    "react-native-nitro-modules": "^0.11.0",
+    "react-native-nitro-template": "./modules/contact"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -38,5 +39,8 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "yarn@3.6.4",
+  "workspaces": [
+    "modules/contact"
+  ]
 }
