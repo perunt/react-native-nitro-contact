@@ -9,10 +9,13 @@ import androidx.core.content.ContextCompat
 import com.facebook.react.bridge.ReactApplicationContext
 import com.margelo.nitro.NitroModules
 import com.margelo.nitro.core.Promise
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class HybridContact : HybridContactSpec() {
+    private var estimatedMemorySize: Long = 0
     override val memorySize: Long
-        get() = estimateMemorySize()
+        get() = estimatedMemorySize
 
     private val context: ReactApplicationContext? = NitroModules.applicationContext
 
@@ -38,7 +41,6 @@ class HybridContact : HybridContactSpec() {
             context,
             Manifest.permission.READ_CONTACTS
         )
-
         return permissionStatus == PackageManager.PERMISSION_GRANTED
     }
 
@@ -46,11 +48,11 @@ class HybridContact : HybridContactSpec() {
         return Promise.async {
             if (!hasPhoneContactsPermission()) {
                 requestContactPermission()
-                throw Exception("Contact permission not granted")
+                return@async emptyArray<ContactData>()
             }
 
-            val startTime = System.currentTimeMillis()
             val contacts = mutableListOf<ContactData>()
+            var totalMemorySize: Long = 0
 
             context?.contentResolver?.let { resolver ->
                 val projection = arrayOf(
@@ -111,6 +113,7 @@ class HybridContact : HybridContactSpec() {
                                     phoneNumbers = currentPhoneNumbers.toTypedArray(),
                                     emailAddresses = currentEmailAddresses.toTypedArray()
                                 ))
+                                totalMemorySize += calculateContactMemory(contact, currentPhoneNumbers, currentEmailAddresses)
                             }
                             currentPhoneNumbers.clear()
                             currentEmailAddresses.clear()
@@ -151,42 +154,60 @@ class HybridContact : HybridContactSpec() {
                             phoneNumbers = currentPhoneNumbers.toTypedArray(),
                             emailAddresses = currentEmailAddresses.toTypedArray()
                         ))
+                        totalMemorySize += calculateContactMemory(contact, currentPhoneNumbers, currentEmailAddresses)
                     }
                 }
             }
 
-            val endTime = System.currentTimeMillis()
-            val executionTime = endTime - startTime
-            Log.d("HybridContact", "getAll execution time: $executionTime ms")
-            Log.d("HybridContact", "Total contacts retrieved: ${contacts.size}")
-
+            estimatedMemorySize = totalMemorySize
             contacts.toTypedArray()
         }
     }
 
-    private fun estimateMemorySize(): Long {
-        // This is a rough estimate. You might want to implement a more accurate calculation based on actual data.
-        return 1024 * 1024 // 1MB as a placeholder
+    private fun calculateContactMemory(contact: ContactData, phoneNumbers: List<StringHolder>, emailAddresses: List<StringHolder>): Long {
+        var memory: Long = 0
+
+        // Base size for ContactData object
+        memory += 48 // Approximate size of object header and references
+
+        // Memory for strings
+        memory += (contact.firstName?.length ?: 0) * 2L
+        memory += (contact.lastName?.length ?: 0) * 2L
+        memory += (contact.middleName?.length ?: 0) * 2L
+        memory += (contact.imageData?.length ?: 0) * 2L
+        memory += (contact.thumbnailImageData?.length ?: 0) * 2L
+
+        // Memory for phone numbers
+        memory += phoneNumbers.sumOf { (it.value.length) * 2L + 24 } // 24 for StringHolder object
+
+        // Memory for email addresses
+        memory += emailAddresses.sumOf { (it.value.length) * 2L + 24 } // 24 for StringHolder object
+
+        // Memory for arrays
+        memory += 16 + phoneNumbers.size * 4L // Array object overhead + references
+        memory += 16 + emailAddresses.size * 4L // Array object overhead + references
+
+        return memory
+    }
+
+    fun getContactCount(): Int {
+        if (context == null) {
+            return 0
+        }
+        val cursor = context.contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
+        val count = cursor?.count ?: 0
+        cursor?.close()
+        return count
     }
 
     companion object {
         const val PERMISSION_REQUEST_CODE = 1
         const val REQUIRED_PERMISSION = Manifest.permission.READ_CONTACTS
-
-        fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray,
-            onGranted: () -> Unit,
-            onDenied: () -> Unit
-        ) {
-            if (requestCode == PERMISSION_REQUEST_CODE) {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    onGranted()
-                } else {
-                    onDenied()
-                }
-            }
-        }
     }
 }
