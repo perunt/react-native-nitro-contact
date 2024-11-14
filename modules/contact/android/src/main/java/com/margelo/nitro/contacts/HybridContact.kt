@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat
 import com.facebook.react.bridge.ReactApplicationContext
 import com.margelo.nitro.NitroModules
 import com.margelo.nitro.core.Promise
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class HybridContact : HybridContactSpec() {
     @Volatile
