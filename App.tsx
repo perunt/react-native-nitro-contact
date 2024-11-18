@@ -131,7 +131,7 @@ function App() {
       const Module = label === 'Nitro' ? NitroContact : Contacts;
       const moduleParams =
         label === 'Nitro'
-          ? ['FIRST_NAME', 'LAST_NAME', 'PHONE_NUMBERS', 'EMAIL_ADDRESSES']
+          ? ['FIRST_NAME', 'LAST_NAME', 'PHONE_NUMBERS', 'EMAIL_ADDRESSES', 'IMAGE_DATA']
           : [
               'firstName',
               'lastName',
